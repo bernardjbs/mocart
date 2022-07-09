@@ -1,0 +1,32 @@
+.nav-bar {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  background: var(--color-bg-variant);
+}
+
+nav a {
+  background: transparent;
+  padding: 0.9rem;
+  display: flex;
+  color: var(--color-light);
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+nav a.active {
+  background: var(--color-bg);
+  color: var(--color-white)
+}
+
+nav li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 2em;
+}
