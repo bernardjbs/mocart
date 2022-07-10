@@ -6,24 +6,24 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-
-
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(routes);
-// Deployment
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
-  });
-} else {
+
   app.get('/', (req, res) => {
-    res.send("API is running...")
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+  
+}else {
+  app.get('/', (req, res) => {
+    res.send('DEVELOPMENT MODE - API is running...')
   })
 }
+
+app.use(routes);
+
 db.once('open', () => {
   const clientbuildpath = path.resolve('client', 'build', 'index.html')
   app.listen(PORT, () => {

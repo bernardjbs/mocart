@@ -10,7 +10,6 @@ mongoose.connect(
 );
 
 mongoose.connection.on('connected', () => {
-  console.log(process.env.MONGODB_URI)
   console.log('Mongoose is connected');
 })
 module.exports = mongoose.connection;
