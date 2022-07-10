@@ -7,6 +7,10 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(routes);
+
 // Deployment
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
@@ -19,10 +23,6 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(routes);
 
 db.once('open', () => {
   app.listen(PORT, () => {
