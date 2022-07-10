@@ -13,8 +13,9 @@ app.use(routes);
 
 // Deployment
 
-const __dirname = path.resolve();
-
+const dirname = path.resolve();
+console.log(dirname)
+console.log(__dirname)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
   app.get('*', (req, res) => {
