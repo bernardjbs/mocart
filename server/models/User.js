@@ -34,6 +34,7 @@ userSchema
     this.set({ first, last });
   });
 
+  // Hash the password before saving to database
   userSchema.pre('save', function (next) {
     if (!this.isModified("password")) {
       return next();
@@ -41,7 +42,8 @@ userSchema
     this.password = bcrypt.hashSync(this.password, 10);
     next();
   });
-// Initialize our User model
+
+// Initialise User model
 const User = model('user', userSchema);
 
 module.exports = User;
