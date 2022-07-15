@@ -6,6 +6,8 @@ require("dotenv").config({
   path: path.resolve(__dirname, '../.env')
 });
 
+let buildpath
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +20,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
+  buildpath = path.resolve('../client', 'build', 'index.html')
 // On Development mode  
 }else {
   app.get('/', (req, res) => {
@@ -28,8 +31,8 @@ if (process.env.NODE_ENV === 'production') {
 app.use(routes);
 
 db.once('open', () => {
-  const clientbuildpath = path.resolve('client', 'build', 'index.html')
+  
   app.listen(PORT, () => {
-    console.log(`API server for mocart running on port ${PORT}! with path ${clientbuildpath}`);
+    console.log(`API server for mocart running on port ${PORT}! with path ${buildpath}`);
   });
 });
