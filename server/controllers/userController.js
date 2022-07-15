@@ -1,29 +1,37 @@
 const { User } = require('../models');
+const { signToken } = require('../utils/auth');
 
 module.exports = {
   // Get all users
-  getUsers(req, res) {
-    User.find()
-      .then((users) => res.json(users))
-      .catch((err) => res.status(500).json(err));
+  async getUsers(req, res) {
+    try {
+      const users = await User.find();
+      res.status(200).json(users);
+    } catch (err) {
+      res.status(500).json({ message: 'Your request could not be performed, please try again', body: err });
+    };
   },
-  // Get a single user
-  getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
-      .select('-__v')
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: 'No user with that ID' })
-          : res.json(user)
-      )
-      .catch((err) => res.status(500).json(err));
+
+  // Create a user
+  async createUser(req, res) {
+    try {
+      const newUser = await User.create(req.body);
+      res.status(200).json(newUser);
+    } catch (err) {
+      res.status(400).json({ message: 'Your request could not be performed, please try again', body: err })
+    };
   },
-  // create a new user
-  createUser(req, res) {
-    User.create(req.body)
-      .then((user) => res.json(user))
-      .catch((err) => res.status(500).json(err));
+
+  // Find a user by ID
+  async getSingleUser(req, res) {
+    try {
+      const user = await User.findOne({ _id: req.params.userId });
+      res.status(200).json(user);
+    } catch (err) {
+      res.status(500).json({ message: 'Your request could not be performed, please try again', body: err })
+    };
   },
+
   // Update a user
   async updateUser(req, res) {
     try {
@@ -35,12 +43,48 @@ module.exports = {
       res.status(200).json(user)
     } catch (err) {
       res.status(400).json({ message: 'Your request could not be performed, please try again', body: err });
-    }
+    };
   },
+
   // Delete a user
-  deleteUser(req, res) {
-    User.findOneAndDelete({ _id: req.params.userId })
-      .then(() => res.json({ message: 'User and associated apps deleted!' }))
-      .catch((err) => res.status(500).json(err));
+  async deleteUser(req, res) {
+    try {
+      await User.findByIdAndDelete({ _id: req.params.userId })
+      res.status(200).json({ message: "User deleted!" });
+    } catch (err) {
+      res.status(400).json({ message: 'Your request could not be performed, please try again', body: err });
+    };
+  },
+
+  // User Login
+  async loginUser(req, res) {
+    try {
+      const user = await User.findOne({ where: { email: req.body.email } });
+
+      if (!user) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email, please try again' });
+        return;
+      };
+
+      const correctPw = await user.isCorrectPassword(req.body.password);
+
+      if (!correctPw) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect password, please try again' });
+        return;
+      }
+      else {
+        const token = signToken(user);
+        res.status(200).json({
+          message: "You are successfully logged in", token: token
+        })
+      };
+
+    } catch (err) {
+      res.status(400).json(err);
+    };
   },
 };

@@ -4,7 +4,15 @@ const bcrypt = require('bcrypt');
 // Schema to create User model
 const userSchema = new Schema(
   {
-    email: String,
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: 'Email address is required',
+      // validate: [validateEmail, 'Please fill a valid email address'],
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
     password: String,
     firstName: String,
     lastName: String,
@@ -34,14 +42,19 @@ userSchema
     this.set({ first, last });
   });
 
-  // Hash the password before saving to database
-  userSchema.pre('save', function (next) {
-    if (!this.isModified("password")) {
-      return next();
-    }
-    this.password = bcrypt.hashSync(this.password, 10);
-    next();
-  });
+// Hash the password before saving to database
+userSchema.pre('save', function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  this.password = bcrypt.hashSync(this.password, 10);
+  next();
+});
+
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 // Initialise User model
 const User = model('user', userSchema);
