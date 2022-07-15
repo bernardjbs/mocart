@@ -69,7 +69,7 @@ module.exports = {
       };
 
       const correctPw = await user.isCorrectPassword(req.body.password);
-
+      console.log(req.body.password)
       if (!correctPw) {
         res
           .status(400)
