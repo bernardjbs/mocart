@@ -52,9 +52,9 @@ userSchema.pre('save', function (next) {
 });
 
 // compare the incoming password with the hashed password
-userSchema.methods.isCorrectPassword = async function (password, userPassword) {
-  console.log("this password: " + userPassword);
-  return bcrypt.compare(password, userPassword);
+userSchema.methods.isCorrectPassword = async function (password) {
+  console.log("this password: " + this.password);
+  return bcrypt.compare(password, this.password);
 };
 
 // Initialise User model
