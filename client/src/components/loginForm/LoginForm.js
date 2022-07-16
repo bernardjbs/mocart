@@ -19,8 +19,14 @@ function LoginForm() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const host = `${window.location.protocol}//${window.location.hostname}`
-      const response = await Axios.post(`${host}:5000/api/users/login`, {
+      let host
+      if (window.location.hostname === 'localhost') {
+         host = `${window.location.protocol}//${window.location.hostname}:5000`
+      } else {
+        host = `${window.location.protocol}//${window.location.hostname}`
+      }
+
+      const response = await Axios.post(`${host}`, {
         username: loginFormState.username,
         password: loginFormState.password
       });
