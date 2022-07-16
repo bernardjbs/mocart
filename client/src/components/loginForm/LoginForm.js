@@ -19,20 +19,13 @@ function LoginForm() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      let hostname
-      if (process.env.REACT_APP_BUILD_ENV === 'development') {
-        hostname = `http://${window.location.hostname}`
-      } else if (process.env.REACT_APP_BUILD_ENV === 'production') {
-        hostname = `https://${window.location.hostname}`
-      }
-
-      console.log(`hostname: ${hostname}`);
-      // console.log(`${hostname}:5000/api/users/login`)
-      const response = await Axios.post(`${hostname}:5000/api/users/login`, {
+      const host = `${window.location.protocol}//${window.location.hostname}`
+      const response = await Axios.post(`${host}:5000/api/users/login`, {
         username: loginFormState.username,
         password: loginFormState.password
       });
 
+      console.log(response)
       // Login the user and redirect to homepage
       Auth.login(response.data.token);
   
