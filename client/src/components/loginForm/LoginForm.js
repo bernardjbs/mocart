@@ -3,7 +3,6 @@ import Axios from 'axios';
 import './loginForm.css';
 import Auth from '../../utils/auth';
 
-
 function LoginForm() {
   const [loginFormState, setLoginFormState] = useState([{ email: '', password: '' }]);
 
@@ -20,10 +19,16 @@ function LoginForm() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      
-      const hostname = window.location.hostname
-      console.log(`${hostname}:5000/api/users/login`)
-      const response = await Axios.post(`http://${hostname}:5000/api/users/login` || `https://${hostname}:5000/api/users/login`, {
+      let hostname
+      if (process.env.REACT_APP_BUILD_ENV === 'development') {
+        hostname = `http://${window.location.hostname}`
+      } else if (process.env.REACT_APP_BUILD_ENV === 'production') {
+        hostname = `https://${window.location.hostname}`
+      }
+
+      console.log(`hostname: ${hostname}`);
+      // console.log(`${hostname}:5000/api/users/login`)
+      const response = await Axios.post(`${hostname}:5000/api/users/login`, {
         username: loginFormState.username,
         password: loginFormState.password
       });
