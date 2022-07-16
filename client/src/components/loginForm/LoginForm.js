@@ -21,12 +21,14 @@ function LoginForm() {
     try {
       let host
       if (window.location.hostname === 'localhost') {
-         host = `${window.location.protocol}//${window.location.hostname}:5000`
+        console.log('localhost')
+        host = `${window.location.protocol}//${window.location.hostname}:5000/api/users/login`
       } else {
-        host = `${window.location.protocol}//${window.location.hostname}`
+        console.log('heroku')
+        host = `${window.location.protocol}//${window.location.hostname}/api/users/login`
       }
 
-      const response = await Axios.post(`${host}/api/users`, {
+      const response = await Axios.post(`${host}`, {
         username: loginFormState.username,
         password: loginFormState.password
       });
