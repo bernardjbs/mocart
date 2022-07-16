@@ -26,7 +26,7 @@ function LoginForm() {
         host = `${window.location.protocol}//${window.location.hostname}`
       }
 
-      const response = await Axios.post(`${host}`, {
+      const response = await Axios.post(`${host}/api/users`, {
         username: loginFormState.username,
         password: loginFormState.password
       });
