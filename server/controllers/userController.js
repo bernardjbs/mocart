@@ -32,7 +32,10 @@ module.exports = {
     };
   },
 
+  // Todo: Create a checkAuth middleware and use it before updating and deleting a user
   // Update a user
+
+  // Todo: Check Logged in user if not admin ==> cannot update userType
   async updateUser(req, res) {
     try {
       const user = await User.findOneAndUpdate(

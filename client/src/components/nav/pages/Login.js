@@ -1,9 +1,9 @@
 import React from 'react';
-
-function Login(props) {
+import LoginForm from '../../loginForm/LoginForm'
+function Login() {
   return (
     <div>
-      <p>Login page</p>
+      <LoginForm />
     </div>
   );
 };
