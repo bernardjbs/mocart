@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Signup(props) {
+function Signup() {
   return (
     <div>
-      <p>Signup page</p>
+      <p>Signup</p>
     </div>
   );
 };

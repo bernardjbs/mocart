@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Nav from '../nav/Nav';
-import Login from '../nav/pages/Login';
-import Home from '../nav/pages/Home';
-import Products from '../nav/pages/Products';
-import Contact from '../nav/pages/Contact';
-import Signup from '../nav/pages/Signup';
+import Login from '../login/Login';
+import Home from '../home/Home';
+import Products from '../products/Products';
+import Contact from '../contact/Contact';
+import Signup from '../signup/Signup';
+import Auth from '../../utils/auth';
 
 function MocartContainer() {
   const [currentPage, setCurrentPage] = useState('Home');
@@ -22,9 +23,13 @@ function MocartContainer() {
       return <Contact />;
     }
     if (currentPage === 'Logout') {
+      Auth.logout();
       return <Home />;
     }
-    return <Signup />;
+    if (currentPage === 'SignUp') {
+      return <Signup />;
+    }
+    return <Home />;
   };
 
   const handlePageChange = (page) => {

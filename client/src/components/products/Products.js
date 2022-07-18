@@ -1,7 +1,7 @@
 import React from 'react';
-import Auth from '../../../utils/auth';
+import Auth from '../../utils/auth';
 
-function Products(props) {
+function Products() {
   return (
     <div>
       <h1>Products page</h1>

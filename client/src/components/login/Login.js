@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import './loginForm.css';
+import './login.css';
 import Auth from '../../utils/auth';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
@@ -8,8 +8,19 @@ const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_U
 // Test on local build 
 // const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : http://www.localhost:5000;
 
-function LoginForm() {
+function LoginForm(props) {
+
   const [loginFormState, setLoginFormState] = useState([{ email: '', password: '' }]);
+  
+  const loginAction = props.action;
+
+  if (loginAction === 'login') {
+    console.log('login');
+  } else if (loginAction === 'logout') {
+    console.log('logout');
+  } else {
+    console.log('Signup');
+  }
 
   // update state based on form input changes
   const handleChange = (event) => {
