@@ -14,10 +14,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Use cors middleware to allow React server with port 3000 to communicate with the backend server (port 5000)
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
+// Use cors middleware to allow React server with port 3000 for development and 5000 for production(build) to communicate with the backend server (port 5000)
+app.use(cors({ origin: ["http://localhost:3000", "http://localhost:5000"] }));
 
 // On Production mode
 if (process.env.NODE_ENV === 'production') {
