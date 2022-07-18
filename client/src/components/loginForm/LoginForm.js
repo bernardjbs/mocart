@@ -5,7 +5,7 @@ import Auth from '../../utils/auth';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
-// Test on local build
+// Test on local build 
 // const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : http://www.localhost:5000;
 
 function LoginForm() {
