@@ -21,7 +21,7 @@ function LoginForm() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await Axios.post(`${URI}`, {
+      const response = await Axios.post(`${URI}/api/users/login`, {
         username: loginFormState.username,
         password: loginFormState.password
       });
