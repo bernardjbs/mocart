@@ -3,6 +3,9 @@ import Axios from 'axios';
 import './loginForm.css';
 import Auth from '../../utils/auth';
 
+let URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
+
+
 function LoginForm() {
   const [loginFormState, setLoginFormState] = useState([{ email: '', password: '' }]);
 
@@ -20,11 +23,10 @@ function LoginForm() {
     e.preventDefault();
     try {
       let host
+      // If host is localhost, use hostname with port 5000
       if (window.location.hostname === 'localhost') {
-        console.log('localhost')
         host = `${window.location.protocol}//${window.location.hostname}:5000/api/users/login`
       } else {
-        console.log('heroku')
         host = `${window.location.protocol}//${window.location.hostname}/api/users/login`
       }
 
@@ -32,10 +34,10 @@ function LoginForm() {
         username: loginFormState.username,
         password: loginFormState.password
       });
-
+      console.log("URI: " + URI)
       console.log(response)
       // Login the user and redirect to homepage
-      Auth.login(response.data.token);
+      //Auth.login(response.data.token);
   
     } catch (err) {
       console.error(err);

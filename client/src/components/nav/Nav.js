@@ -1,6 +1,8 @@
 import React from 'react';
 import './nav.css';
 import logo from '../../assets/img/sflogo.jpg';
+import Auth from '../../utils/auth';
+
 function Nav({ currentPage, handlePageChange }) {
   return (
     <section className="nav-bar">
@@ -18,12 +20,22 @@ function Nav({ currentPage, handlePageChange }) {
           <li>
             <a className="nav-text" href="#contact" onClick={() => handlePageChange('Contact')}>Contact</a>
           </li>
-          <li>
-            <a className="nav-text" href="#login" onClick={() => handlePageChange('Login')}>Login</a>
-          </li>
-          <li>
-            <a className="nav-text" href="#signup" onClick={() => handlePageChange('SignUp')}>Sign Up</a>
-          </li>
+
+          {Auth.loggedIn() ? (
+            <li>
+              <a className="nav-text" href="#logout" onClick={() => handlePageChange('Logout')}>Logout</a>
+            </li>
+          ) : (
+            <>
+              <li>
+                <a className="nav-text" href="#login" onClick={() => handlePageChange('Login')}>Login</a>
+              </li>
+              <li>
+                <a className="nav-text" href="#signup" onClick={() => handlePageChange('SignUp')}>Sign Up</a>
+              </li>
+            </>
+          )}
+
         </ul>
       </nav>
     </section>

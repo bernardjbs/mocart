@@ -21,6 +21,9 @@ function MocartContainer() {
     if (currentPage === 'Contact') {
       return <Contact />;
     }
+    if (currentPage === 'Logout') {
+      return <Home />;
+    }
     return <Signup />;
   };
 
