@@ -3,7 +3,7 @@ import Axios from 'axios';
 import './loginForm.css';
 import Auth from '../../utils/auth';
 
-const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_LOCAL_PROD_URI;
+const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
 function LoginForm() {
   const [loginFormState, setLoginFormState] = useState([{ email: '', password: '' }]);
