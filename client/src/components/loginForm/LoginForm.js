@@ -16,7 +16,7 @@ function LoginForm() {
     setLoginFormState({
       ...loginFormState,
       [name]: value,
-    });
+    }); 
   };
  
   const handleFormSubmit = async (e) => {
