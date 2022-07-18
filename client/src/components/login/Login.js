@@ -8,19 +8,9 @@ const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_U
 // Test on local build 
 // const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : http://www.localhost:5000;
 
-function LoginForm(props) {
+function Login() {
 
   const [loginFormState, setLoginFormState] = useState([{ email: '', password: '' }]);
-  
-  const loginAction = props.action;
-
-  if (loginAction === 'login') {
-    console.log('login');
-  } else if (loginAction === 'logout') {
-    console.log('logout');
-  } else {
-    console.log('Signup');
-  }
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -39,11 +29,8 @@ function LoginForm(props) {
         username: loginFormState.username,
         password: loginFormState.password
       });
-      console.log("URI: " + URI)
-      console.log(response)
       // Login the user and redirect to homepage
       Auth.login(response.data.token);
-  
     } catch (err) {
       console.error(err);
     }
@@ -81,4 +68,4 @@ function LoginForm(props) {
   );
 }
 
-export default LoginForm;
+export default Login;
