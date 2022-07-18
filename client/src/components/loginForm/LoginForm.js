@@ -28,7 +28,7 @@ function LoginForm() {
       console.log("URI: " + URI)
       console.log(response)
       // Login the user and redirect to homepage
-      // Auth.login(response.data.token);
+      Auth.login(response.data.token);
   
     } catch (err) {
       console.error(err);
