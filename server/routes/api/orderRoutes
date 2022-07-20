@@ -1,0 +1,24 @@
+const router = require('express').Router();
+const {
+  getOrders,
+  getSingleOrder,
+  createOrder,
+  deleteOrder,
+  updateOrder,
+} = require('../../controllers/OrderController');
+
+// /api/Orders
+router.route('/')
+  .get(getOrders)
+
+
+// /api/Orders/:OrderId
+router.route('/:OrderId')
+  .get(getSingleOrder)
+  .put(updateOrder)
+  .delete(deleteOrder);
+
+router.route('/neworder')
+  .post(createOrder);
+  
+module.exports = router;

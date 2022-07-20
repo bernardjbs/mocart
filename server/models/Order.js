@@ -1,24 +1,45 @@
 const { Schema, model } = require('mongoose');
 
-// Cart Item details
-const cartItemSchema = {
+// Image uploads
+const printsSchema = new Schema(
+  {
+    filename: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    contentType: {
+      type: String,
+      required: true,
+    },
+    imageBase64: {
+      type: String,
+      required: true,
+    },
+    Quantity: {
+      type: Number,
+      required: true,
+    },
+    Size: {
+      type: String,
+      required: true,
+    }, 
+ },
+);
 
-};
-
-// Discount and discount type (product / item)
-const discountSchema = {
-
-};
-
-// Shipment details
-const shipmentSchema = {
-
-};
-
-// Order Schema binding cart item, discount and shipment schemas used to create model
+// Order Schema binding prints schema used to create model
 const orderSchema = new Schema(
   {
-
+    prints: [printsSchema], 
+    delivery: {
+      type: String, 
+      required: true,
+    },
+    note: String,
+    status: String, // Open, Complete, Delivered, In Progress
+  },
+  {
+    timestamps: true,
   },
 );
 
