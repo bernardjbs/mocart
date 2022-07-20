@@ -5,15 +5,15 @@ const {
   createOrder,
   deleteOrder,
   updateOrder,
-} = require('../../controllers/OrderController');
+} = require('../../controllers/orderController');
 
 // /api/Orders
 router.route('/')
   .get(getOrders)
 
 
-// /api/Orders/:OrderId
-router.route('/:OrderId')
+// /api/orders/:OrderId
+router.route('/:orderId')
   .get(getSingleOrder)
   .put(updateOrder)
   .delete(deleteOrder);

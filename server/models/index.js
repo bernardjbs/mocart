@@ -1,5 +1,5 @@
 const User = require('./User');
 const Order = require('./Order');
-const Product = require('./Product');
+const PrintSize = require('./PrintSize');
 
-module.exports = { User };
+module.exports = { User, Order, PrintSize };

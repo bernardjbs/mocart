@@ -5,8 +5,8 @@ module.exports = {
   // Get all orders
   async getOrders(req, res) {
     try {
-      const users = await Order.find();
-      res.status(200).json(users);
+      const orders = await Order.find();
+      res.status(200).json(orders);
     } catch (err) {
       res.status(500).json({ message: 'Your request could not be performed, please try again', body: err });
     };
