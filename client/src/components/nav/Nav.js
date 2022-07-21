@@ -15,7 +15,7 @@ function Nav({ currentPage, handlePageChange }) {
             <a className="nav-text" href="#home" onClick={() => handlePageChange('Home')}>Home</a>
           </li>
           <li>
-            <a className="nav-text" href="#order" onClick={() => handlePageChange('Order')}>Order</a>
+            <a className="nav-text" href="#gallery" onClick={() => handlePageChange('Gallery')}>Gallery</a>
           </li>
           <li>
             <a className="nav-text" href="#contact" onClick={() => handlePageChange('Contact')}>Contact</a>

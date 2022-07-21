@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Nav from '../nav/Nav';
 import Login from '../login/Login';
 import Home from '../home/Home';
-import Order from '../order/Order';
+import Gallery from '../gallery/Gallery';
 import Contact from '../contact/Contact';
 import Signup from '../signup/Signup';
 import Auth from '../../utils/auth';
@@ -13,8 +13,8 @@ function MocartContainer() {
     if (currentPage === 'Home') {
       return <Home />;
     }
-    if (currentPage === 'Order') {
-      return <Order />;
+    if (currentPage === 'Gallery') {
+      return <Gallery />;
     }
     if (currentPage === 'Login') {
       return <Login />;

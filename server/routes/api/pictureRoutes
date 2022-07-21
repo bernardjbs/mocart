@@ -1,0 +1,14 @@
+const router = require('express').Router();
+const {
+  getPictures,
+  uploads,
+} = require('../../controllers/pictureController');
+
+// /api/Orders
+router.route('/')
+  .get(getPictures)
+
+router.route('/uploadmultiple')
+  .post(uploads);
+  
+module.exports = router;

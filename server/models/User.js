@@ -16,6 +16,7 @@ const userSchema = new Schema(
     password: String,
     firstName: String,
     lastName: String,
+    address: String,
     userType: String, 
     orders: [
       {
@@ -23,6 +24,7 @@ const userSchema = new Schema(
         ref: 'order'
       },
     ], 
+    
   },
   {
     // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
