@@ -1,58 +1,59 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Auth from '../../utils/auth';
-import Axios from 'axios';
-
-// import Dropzone from 'react-dropzone';
-// import { button, Checkbox, form, Input } from 'antd';
-const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
-
-function Order() {
-
-  const [loginFormState, setLoginFormState] = useState([{ email: '', password: '' }]);
+import axios from 'axios';
 
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+
+function Gallery(props) {
+  const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
+
+  const [pictureFiles, setPictureFiles] = useState('');
+
+  const PictureFileChange = (e) => {
+    setPictureFiles(e.target.files);
+  }
+
+  const pictureFilesUpload = async (data) => {
     try {
-      const response = await Axios.post(`${URI}/api/print/uploads`, {
-        username: loginFormState.username,
-        password: loginFormState.password
-      });
-      // Login the user and redirect to homepage
-      Auth.login(response.data.token);
-    } catch (err) {
-      console.error(err);
+      await axios.post(`${URI}/api/picture/uploadmultiple`, data);
+    } catch (error) {
+      throw error;
     }
   }
 
-  const uploadSingleFile = async () => {
+  const UploadPictureFiles = async (e) => {
     const formData = new FormData();
-
+    for (let i = 0; i < pictureFiles.length; i++) {
+      formData.append('files', pictureFiles[i]);
+    }
+    await pictureFilesUpload(formData);
+    props.getPictures();
   }
+
   return (
     <>
-
-      <form onSubmit={handleFormSubmit}>
-        <div class="row">
-          <div class="col-8">
-            <input type="file" class="form-control" name="images" id="formFile" multiple />
-          </div>
-          <div class="col-2">
-            <input type="submit" class="btn btn-warning" value="Upload Images" />
+      <div className="row">
+        <div className="col-6">
+          <label >Title</label>
+        </div>
+        <div className="col-6">
+          <div className="form-group">
+            <label>Select Picture Files</label>
+            <input type="file" onChange={(e) => PictureFileChange(e)} className="form-control" multiple />
           </div>
         </div>
-      </form>
-      <section class="mt-5">
-        <div class="row">
-
-          {/* LOOP AND DISPLAY IMAGES */}
-
+      </div>
+      <div className="row">
+        <div className="col-10">
+          <button type="button" onClick={() => UploadPictureFiles()} className="btn btn-danger">Upload</button>
         </div>
-      </section>
+
+      </div>
+
     </>
   )
 
 
 };
 
-export default Order;
+export default Gallery;

@@ -3,10 +3,6 @@ const { Schema, model } = require('mongoose');
 // Image uploads
 const pictureSchema = new Schema(
   {
-    title: {
-      type: String,
-      required: true
-    },
     files: [Object]
   },
   {
