@@ -12,9 +12,9 @@ module.exports = {
     };
   },
 
-  uploadPictures(req, res) {
+  uploadPictures (req, res, next) {
     const files = req.files;
-    files.map(async (file, index) => {
+    let result = files.map(async (file, index) => {
       let img = fs.readFileSync(file.path)
       const img_base64 = img.toString('base64')
       const picture = new Picture({
@@ -22,13 +22,24 @@ module.exports = {
         contentType: files[index].mimetype,
         imageBase64: img_base64,
       });
-      try {
-        await picture
-          .save();
-        res.status(201).send('Files Uploaded Successfully');
-      } catch (error) {
-        res.status(400).send(error.message);
-      }
+
+      return picture
+      .save()
+      .then(() => {
+          return { msg : `${files[index].originalname} Uploaded Successfully...!`}
+      })
+      .catch(error =>{
+          if(error){
+              return Promise.reject({ error : error.message || `Cannot Upload ${files[index].originalname} Something Missing!`})
+          }
+      })
     });
+    Promise.all(result)
+    .then( msg => {
+        res.json(msg);
+    })
+    .catch(err =>{
+        res.json(err);
+    })
   },
 };

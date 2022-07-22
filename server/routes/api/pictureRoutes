@@ -5,8 +5,7 @@ const {
   uploadPictures,
 } = require('../../controllers/pictureController');
 
-// /api/Orders
-router.route('/')
+router.route('/pictures')
   .get(getPictures)
 
 router.post('/uploadmultiple', upload.array('files'), uploadPictures);
