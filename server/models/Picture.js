@@ -1,14 +1,21 @@
 const { Schema, model } = require('mongoose');
 
 // Image uploads
-const pictureSchema = new Schema(
-  {
-    files: [Object]
+
+const pictureSchema = new Schema({
+  filename: {
+    type: String,
+    required: true
   },
-  {
-    timestamps: true
+  contentType: {
+    type: String,
+    required: true
   },
-);
+  imageBase64: {
+    type: String,
+    required: true
+  }
+});
 
 const Picture = model('picture', pictureSchema);
 

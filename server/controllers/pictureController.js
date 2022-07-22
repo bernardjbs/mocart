@@ -1,5 +1,6 @@
 const { Picture } = require('../models');
 const { signToken } = require('../utils/auth');
+const fs = require('fs');
 
 module.exports = {
   async getPictures(req, res) {
@@ -11,25 +12,23 @@ module.exports = {
     };
   },
 
-  async uploadPictures(req, res, next) {
-    try {
-      console.log(req.files);
-      let filesArray = [];
-      req.files.forEach(element => {
-        const file = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-        }
-        filesArray.push(file);
+  uploadPictures(req, res) {
+    const files = req.files;
+    files.map(async (file, index) => {
+      let img = fs.readFileSync(file.path)
+      const img_base64 = img.toString('base64')
+      const picture = new Picture({
+        filename: files[index].originalname,
+        contentType: files[index].mimetype,
+        imageBase64: img_base64,
       });
-      const pictures = new Picture({
-        files: filesArray
-      });
-      await pictures.save();
-      res.status(201).send('Files Uploaded Successfully');
-    } catch (error) {
-      res.status(400).send(error.message);
-    }
+      try {
+        await picture
+          .save();
+        res.status(201).send('Files Uploaded Successfully');
+      } catch (error) {
+        res.status(400).send(error.message);
+      }
+    });
   },
 };
