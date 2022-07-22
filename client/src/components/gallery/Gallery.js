@@ -15,6 +15,7 @@ function Gallery(props) {
 
   const pictureFilesUpload = async (data) => {
     try {
+      console.log(data)
       await axios.post(`${URI}/api/picture/uploadmultiple`, data);
     } catch (error) {
       throw error;
@@ -26,6 +27,7 @@ function Gallery(props) {
     for (let i = 0; i < pictureFiles.length; i++) {
       formData.append('files', pictureFiles[i]);
     }
+    console.log(formData.values)
     await pictureFilesUpload(formData);
     props.getPictures();
   }

@@ -13,6 +13,7 @@ module.exports = {
 
   async uploadPictures(req, res, next) {
     try {
+      console.log(req.files);
       let filesArray = [];
       req.files.forEach(element => {
         const file = {
@@ -23,7 +24,6 @@ module.exports = {
         filesArray.push(file);
       });
       const pictures = new Picture({
-        title: req.body.title,
         files: filesArray
       });
       await pictures.save();

@@ -9,9 +9,6 @@ const {
 router.route('/')
   .get(getPictures)
 
-router.route('/uploadmultiple')
-  .post(uploadPictures, upload.array('files'));
-
-// router.post('/uploadmultiple', upload.array('files'), uploadPictures);
+router.post('/uploadmultiple', upload.array('files'), uploadPictures);
 
 module.exports = router;
