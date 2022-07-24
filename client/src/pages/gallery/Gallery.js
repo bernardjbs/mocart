@@ -12,9 +12,6 @@ import Cart from '../../components/cart/Cart';
 import {Badge, Button, Drawer, Grid} from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
 
-// import Item from './Item/Item';
-// import Cart from './Cart/Cart';
-
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
 
@@ -27,7 +24,6 @@ function Gallery() {
   }
   
   const handleAddToCart = (clickedItem) => {
-    console.log("I am here")
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item._id === clickedItem._id);

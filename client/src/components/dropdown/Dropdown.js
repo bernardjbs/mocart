@@ -7,30 +7,53 @@ function Dropdown() {
 
 
   const [sizes, setSizes] = useState([]);
+  const [price, setPrice] = useState('');
   const [value, setValue] = useState('');
 
   useEffect(() => {
     async function getSizes() {
       // Fetch data
       const { data } = await axios.get(`${URI}/api/printsize`);
-      setSizes(data.map((data) => ({ label: data.dimension, value: data.dimension })));
+      setSizes(data.map((data) => (
+        {
+          id: data._id,
+          price: data.price,
+          label: data.dimension,
+          value: data.dimension
+        })));
     }
 
     // Trigger the fetch
     getSizes();
   }, []);
 
+  const selectPrice = (e) => {
+    const idx = e.target.selectedIndex;
+    const option = e.target.querySelectorAll('option')[idx];
+    const dataPrice = option.getAttribute('data-price');
+    setPrice(dataPrice)
+  }
+
   return (
-    <select
-      value={value}
-      onChange={(e) => setValue(e.currentTarget.value)}
-    >
-      {sizes.map(({ label, value }) => (
-        <option key={value} value={value}>
-          {label}
-        </option>
-      ))}
-    </select>
+    <>
+      <select
+        value={value}
+        onChange={(e) => { 
+          setValue(e.currentTarget.value) 
+          {selectPrice(e)}
+        } }
+      >
+        {sizes.map((size) => (
+          <option className='price-option' key={size.id} value={size.value} data-price={size.price}>
+            {size.label}
+          </option>
+          )
+        )}
+        {console.log(price)}
+      </select>
+      
+    </>
+
   );
 };
 
