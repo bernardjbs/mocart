@@ -1,12 +1,51 @@
 import React, { useState, useEffect, useCallback } from 'react';
+
 import './gallery.css'
 import Auth from '../../utils/auth';
 import axios from 'axios';
+
+// Import components
 import Dropdown from '../../components/dropdown/Dropdown';
+import Item from '../../components/item/Item';
+import Cart from '../../components/cart/Cart';
+
+import {Badge, Button, Drawer, Grid} from '@mui/material';
+import { AddShoppingCart } from '@mui/icons-material';
+
+// import Item from './Item/Item';
+// import Cart from './Cart/Cart';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
+
 function Gallery() {
+
+  const getTotalItems = (items) => {
+    const reducedAmount = items.reduce((acc, item) => acc + item.amount, 0);
+    console.log(reducedAmount);
+    return reducedAmount
+  }
+  
+  const handleAddToCart = (clickedItem) => {
+    console.log("I am here")
+    setCartItems(prev => {
+      // 1. Is the item already added in the cart?
+      const isItemInCart = prev.find(item => item._id === clickedItem._id);
+
+      if (isItemInCart) {
+        return prev.map(item =>
+          item.id === clickedItem._id
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        );
+      }
+      // First time the item is added
+      return [...prev, { ...clickedItem, amount: 1 }];
+    });
+  };
+
+  const handleRemoveFromCart = () => null;
+
   const handlePictureFileChange = (e) => {
     setPictureFiles(e.target.files);
   }
@@ -24,12 +63,16 @@ function Gallery() {
   const [pictureFiles, setPictureFiles] = useState('');
   const [getPicturesData, setGetPicturesData] = useState([]);
 
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+
+
   // Get pictures data
   const getPictureFiles = useCallback(async () => {
     try {
       const { data } = await axios.get(`${URI}/api/picture/pictures`);
       setGetPicturesData(data);
-      return data; 
+      return data;
     } catch (error) {
       throw error;
     };
@@ -52,7 +95,7 @@ function Gallery() {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     getPictureFiles()
       .catch(console.error);
@@ -87,9 +130,30 @@ function Gallery() {
             <Dropdown />
           </div>
         )}
-
       </section>
+
+      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+      <Cart
+          cartItems={cartItems}
+          addToCart={handleAddToCart}
+          removeFromCart={handleRemoveFromCart}
+        />
+      </Drawer>
+      <Button onClick={() => setCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+          <AddShoppingCart />
+        </Badge>
+      </Button>
+      <Grid container spacing={3}>
+
+        {getPicturesData?.map(item => (
+          <Grid item key={item._id} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={handleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
     </>
+
   )
 
 
