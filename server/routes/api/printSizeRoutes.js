@@ -7,7 +7,7 @@ const {
   updatePrintSize,
 } = require('../../controllers/printSizeController');
 
-// /api/PrintSizes
+// /api/printSizes
 router.route('/')
   .get(getPrintSizes)
   .post(createPrintSize);

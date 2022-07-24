@@ -1,9 +1,10 @@
 const { Picture } = require('../models');
 const { signToken } = require('../utils/auth');
 const fs = require('fs');
+const SERVER_URI = process.env.NODE_ENV === 'development' ? process.env.DEV_SERVER_URI : process.env.PROD_SERVER_URI;
 
 module.exports = {
-  async getPictures(req, res) {
+  async getPictures(req, res, next) {
     try {
       const pictures = await Picture.find();
       res.status(200).json(pictures);
@@ -14,13 +15,16 @@ module.exports = {
 
   uploadPictures (req, res, next) {
     const files = req.files;
+    let filepath = '';
     let result = files.map(async (file, index) => {
+      filepath = file.path.replace(/\\/g, '/') // convert the backslash to forward slash
       let img = fs.readFileSync(file.path)
       const img_base64 = img.toString('base64')
       const picture = new Picture({
         filename: files[index].originalname,
         contentType: files[index].mimetype,
         imageBase64: img_base64,
+        filepath: `${SERVER_URI}/${filepath}`,
       });
 
       return picture

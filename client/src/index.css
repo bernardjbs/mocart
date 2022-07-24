@@ -78,6 +78,10 @@ a:hover {
   color: var(--color-white);
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
 .btn {
   width: max-content;
   display: inline-block;

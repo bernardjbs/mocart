@@ -1,46 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import './gallery.css'
 import Auth from '../../utils/auth';
 import axios from 'axios';
+import Dropdown from '../dropdown/Dropdown';
+
+const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
 function Gallery() {
-  const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
-
-  // Declaring States
-  const [showPictures, setShowPictures] = useState([]);
-  const [pictureFiles, setPictureFiles] = useState('');
-
-  // Get Pictures API
-  const getPictureFiles = async () => {
-    try {
-      const { data } = await axios.get(`${URI}/api/picture/pictures`);
-      // console.log(data)
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  // Upload Pictures API
-  const pictureFilesUpload = async (data) => {
-    try {
-      await axios.post(`${URI}/api/picture/uploadmultiple`, data);
-      // console.log(pictureFiles);
-
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  const getPictures = async () => {
-    try {
-      const pictures = await getPictureFiles();
-      setShowPictures(pictures);
-      console.log(showPictures);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   const handlePictureFileChange = (e) => {
     setPictureFiles(e.target.files);
   }
@@ -54,15 +20,48 @@ function Gallery() {
     getPictures();
   }
 
+  // Declaring States
+  const [pictureFiles, setPictureFiles] = useState('');
+  const [getPicturesData, setGetPicturesData] = useState([]);
+
+  // Get pictures data
+  const getPictureFiles = useCallback(async () => {
+    try {
+      const { data } = await axios.get(`${URI}/api/picture/pictures`);
+      setGetPicturesData(data);
+      return data;
+    } catch (error) {
+      throw error;
+    };
+  }, []);
+
+  // Upload Pictures API
+  const pictureFilesUpload = async (data) => {
+    try {
+      await axios.post(`${URI}/api/picture/uploadmultiple`, data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  const getPictures = async () => {
+    try {
+      const pictures = await getPictureFiles();
+      setGetPicturesData(pictures);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   useEffect(() => {
-    getPictures();
-  }, [])
+    getPictureFiles()
+      .catch(console.error);
+  }, [getPictureFiles]);
 
   return (
     <>
+      {/* {getPicturesData.map(data => <div key={data._id}>{data.filename}</div>)} */}
       <div className="row">
-        <div className="col-6">
-        </div>
         <div className="col-6">
           <div className="form-group">
             <label>Select Picture Files</label>
@@ -75,23 +74,21 @@ function Gallery() {
           <button type="button" onClick={() => handleUploadPictures()} className="btn btn-danger">Upload</button>
         </div>
       </div>
-      {/* <div className="col-6">
-        <h4 className="text-success font-weight-bold">My Pictures</h4>
-        {showPictures.map((element, index) =>
-          <div key={element._id}>
-            <h6 className="text-danger font-weight-bold">{element.filename}</h6>
-            <div className="row">
-              {element.files.map((file, index) =>
-                <div className="col-6">
-                  <div className="card mb-2 border-0 p-0">
-                    <img src={`http://localhost:3000/server/uploads/${file.filePath}`} height="200" className="card-img-top img-responsive" alt="img" />
-                  </div>
-                </div>
-              )}
+      <section className="pictures-section">
+        <h1 className="test">My Pictures</h1>
+
+        {getPicturesData.map((data) =>
+          <div key={data._id} className="row">
+            {data.filename}
+            <div className='row quantity'>
+              Quantity
+              <input />
             </div>
+            <Dropdown />
           </div>
         )}
-      </div> */}
+
+      </section>
     </>
   )
 

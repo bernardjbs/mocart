@@ -14,7 +14,11 @@ const pictureSchema = new Schema({
   imageBase64: {
     type: String,
     required: true
-  }
+  }, 
+  filepath: {
+    type: String, 
+    required: true
+  },
 });
 
 const Picture = model('picture', pictureSchema);
