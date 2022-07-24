@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Nav from '../nav/Nav';
-import Login from '../login/Login';
-import Home from '../home/Home';
-import Gallery from '../gallery/Gallery';
-import Contact from '../contact/Contact';
-import Signup from '../signup/Signup';
+import Login from '../../pages/login/Login';
+import Home from '../../pages/home/Home';
+import Gallery from '../../pages/gallery/Gallery';
+import Contact from '../../pages/contact/Contact';
+import Signup from '../../pages/signup/Signup';
 import Auth from '../../utils/auth';
 
 function MocartContainer() {

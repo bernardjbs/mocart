@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './gallery.css'
 import Auth from '../../utils/auth';
 import axios from 'axios';
-import Dropdown from '../dropdown/Dropdown';
+import Dropdown from '../../components/dropdown/Dropdown';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
@@ -29,7 +29,7 @@ function Gallery() {
     try {
       const { data } = await axios.get(`${URI}/api/picture/pictures`);
       setGetPicturesData(data);
-      return data;
+      return data; 
     } catch (error) {
       throw error;
     };
