@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './cartItem.css';
 import Button from '@mui/material/Button';
-import Dropdown from '../../components/dropdown/Dropdown';
+import ItemOrder from '../itemOrder/ItemOrder';
 
 function CartItem({ item, addToCart, removeFromCart }) {
+
+
   return (
     <>
       <div>
         <p>{item.filename}</p>
-        <img src={`data:image;base64,${item.imageBase64}`} alt={item.filename}/>
+        <img src={`data:image;base64,${item.imageBase64}`} alt={item.filename} />
         {/* <img src={item.imageBase64} alt={item.title} /> */}
         <div className='picture-size-order'>
           <Button
@@ -30,7 +32,9 @@ function CartItem({ item, addToCart, removeFromCart }) {
           >
             +
           </Button>
-          <Dropdown />
+          <ItemOrder
+            quantity={item.amount}
+          />
         </div>
       </div>
       <hr />

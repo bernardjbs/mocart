@@ -3,29 +3,42 @@ import axios from 'axios';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
-function Dropdown() {
+function Dropdown({ quantity }) {
 
 
   const [sizes, setSizes] = useState([]);
   const [price, setPrice] = useState('');
   const [value, setValue] = useState('');
 
+  const getSizes = async () => {
+    // Fetch data
+    const { data } = await axios.get(`${URI}/api/printsize`);
+    setSizes(data.map((data) => (
+      {
+        id: data._id,
+        price: data.price,
+        label: data.dimension,
+        value: data.dimension
+      })));
+  }
   useEffect(() => {
-    async function getSizes() {
-      // Fetch data
-      const { data } = await axios.get(`${URI}/api/printsize`);
-      setSizes(data.map((data) => (
-        {
-          id: data._id,
-          price: data.price,
-          label: data.dimension,
-          value: data.dimension
-        })));
-    }
-
+    // Fetch sizes
+    getSizes()
     // Trigger the fetch
     getSizes();
   }, []);
+
+  const initialPrice = () => {
+    let initialPrice
+    if (sizes.length > 0) {
+      initialPrice = sizes[0].price
+    }
+    return initialPrice
+  }
+
+  const itemSubTotal = () => {
+    return price * quantity;
+  }
 
   const selectPrice = (e) => {
     const idx = e.target.selectedIndex;
@@ -38,20 +51,21 @@ function Dropdown() {
     <>
       <select
         value={value}
-        onChange={(e) => { 
-          setValue(e.currentTarget.value) 
-          {selectPrice(e)}
-        } }
+        onChange={(e) => {
+          setValue(e.currentTarget.value)
+          { selectPrice(e) }
+        }}
       >
+        <option>Size</option>
         {sizes.map((size) => (
           <option className='price-option' key={size.id} value={size.value} data-price={size.price}>
             {size.label}
           </option>
-          )
+        )
         )}
-        {console.log(price)}
       </select>
-      
+      ${itemSubTotal().toFixed(2)}
+
     </>
 
   );
