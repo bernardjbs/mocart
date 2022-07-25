@@ -5,7 +5,6 @@ import Auth from '../../utils/auth';
 import axios from 'axios';
 
 // Import components
-import Dropdown from '../../components/dropdown/Dropdown';
 import Item from '../../components/item/Item';
 import Cart from '../../components/cart/Cart';
 
@@ -19,7 +18,6 @@ function Gallery() {
 
   const getTotalItems = (items) => {
     const reducedAmount = items.reduce((acc, item) => acc + item.amount, 0);
-    // console.log(reducedAmount);
     return reducedAmount
   }
 
@@ -100,7 +98,6 @@ function Gallery() {
   const getPictures = async () => {
     try {
       const pictures = await getPictureFiles();
-      // console.log(pictures)
       setGetPicturesData(pictures);
     } catch (error) {
       console.log(error);
@@ -129,17 +126,6 @@ function Gallery() {
       </div>
       <section className="pictures-section">
         <h1 className="test">My Pictures</h1>
-
-        {getPicturesData.map((data) =>
-          <div key={data._id} className="row">
-            {data.filename}
-            <div className='row quantity'>
-              Quantity
-              <input />
-            </div>
-            <Dropdown />
-          </div>
-        )}
       </section>
 
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
