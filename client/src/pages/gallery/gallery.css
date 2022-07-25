@@ -1,11 +1,11 @@
-.pictures-section {
+.picture-image-section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  background: var(--color-bg-variant);
+  flex-direction: row;
 }
-
+.picture-image {
+  height: 20rem;
+  width: auto
+}
 .quantity {
   width: 8rem
 }

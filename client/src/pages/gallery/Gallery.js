@@ -19,7 +19,7 @@ function Gallery() {
 
   const getTotalItems = (items) => {
     const reducedAmount = items.reduce((acc, item) => acc + item.amount, 0);
-    console.log(reducedAmount);
+    // console.log(reducedAmount);
     return reducedAmount
   }
 
@@ -29,13 +29,15 @@ function Gallery() {
       const isItemInCart = prev.find(item => item._id === clickedItem._id);
 
       if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem._id
+        const items = prev.map(item =>
+          item._id === clickedItem._id
             ? { ...item, amount: item.amount + 1 }
             : item
         );
+        return items;
       }
       // First time the item is added
+      
       return [...prev, { ...clickedItem, amount: 1 }];
     });
   };
@@ -87,7 +89,7 @@ function Gallery() {
   const getPictures = async () => {
     try {
       const pictures = await getPictureFiles();
-      console.log(pictures)
+      // console.log(pictures)
       setGetPicturesData(pictures);
     } catch (error) {
       console.log(error);
@@ -101,10 +103,7 @@ function Gallery() {
 
   return (
     <>
-      {getPicturesData.map(data => 
-         <img src={data.filepath} key={data._id} />
-      )}
-      <div className="row">0
+      <div className="row">
         <div className="col-6">
           <div className="form-group">
             <label>Select Picture Files</label>
@@ -145,7 +144,6 @@ function Gallery() {
         </Badge>
       </Button>
       <Grid container spacing={3}>
-
         {getPicturesData?.map(item => (
           <Grid item key={item._id} xs={12} sm={4}>
             <Item item={item} handleAddToCart={handleAddToCart} />

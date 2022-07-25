@@ -82,7 +82,7 @@ a:hover {
   display: flex;
   flex-direction: row;
 }
-.btn {
+/* .btn {
   width: max-content;
   display: inline-block;
   color: var(--color-primary);
@@ -102,7 +102,7 @@ a:hover {
 .btn-primary {
   background: var(--color-primary);
   color: var(--color-bg);
-}
+} */
 
 img {
   display: block;

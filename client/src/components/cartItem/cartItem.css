@@ -1,0 +1,12 @@
+img {
+  max-width: 150px;
+  object-fit: cover;
+  margin-left: 40px;
+}
+
+.picture-size-order {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}

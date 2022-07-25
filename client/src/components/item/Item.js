@@ -7,7 +7,7 @@ function Item({ item, handleAddToCart }) {
     <>
       <img src='' alt='' />
       <div>
-        <p>ID: {item._id}</p>
+        <img className='picture-image' src={item.filepath} />
         <p>File: {item.filename}</p>
       </div>
       <Button onClick={() => handleAddToCart(item)}>Add to cart</Button>
