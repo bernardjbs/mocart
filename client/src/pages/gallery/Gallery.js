@@ -42,7 +42,18 @@ function Gallery() {
     });
   };
 
-  const handleRemoveFromCart = () => null;
+  const handleRemoveFromCart = (id) => {
+    setCartItems(prev =>
+      prev.reduce((acc, item) => {
+        if (item._id === id) {
+          if (item.amount === 1) return acc;
+          return [...acc, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...acc, item];
+        }
+      }, [])
+    );
+  };
 
   const handlePictureFileChange = (e) => {
     setPictureFiles(e.target.files);
