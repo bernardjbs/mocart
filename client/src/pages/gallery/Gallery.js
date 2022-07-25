@@ -9,7 +9,7 @@ import Dropdown from '../../components/dropdown/Dropdown';
 import Item from '../../components/item/Item';
 import Cart from '../../components/cart/Cart';
 
-import {Badge, Button, Drawer, Grid} from '@mui/material';
+import { Badge, Button, Drawer, Grid } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
@@ -22,7 +22,7 @@ function Gallery() {
     console.log(reducedAmount);
     return reducedAmount
   }
-  
+
   const handleAddToCart = (clickedItem) => {
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
@@ -67,6 +67,7 @@ function Gallery() {
   const getPictureFiles = useCallback(async () => {
     try {
       const { data } = await axios.get(`${URI}/api/picture/pictures`);
+      console.log(data)
       setGetPicturesData(data);
       return data;
     } catch (error) {
@@ -86,6 +87,7 @@ function Gallery() {
   const getPictures = async () => {
     try {
       const pictures = await getPictureFiles();
+      console.log(pictures)
       setGetPicturesData(pictures);
     } catch (error) {
       console.log(error);
@@ -99,8 +101,10 @@ function Gallery() {
 
   return (
     <>
-      {/* {getPicturesData.map(data => <div key={data._id}>{data.filename}</div>)} */}
-      <div className="row">
+      {getPicturesData.map(data => 
+         <img src={data.filepath} key={data._id} />
+      )}
+      <div className="row">0
         <div className="col-6">
           <div className="form-group">
             <label>Select Picture Files</label>
@@ -129,7 +133,7 @@ function Gallery() {
       </section>
 
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-      <Cart
+        <Cart
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}

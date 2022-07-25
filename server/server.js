@@ -20,7 +20,7 @@ app.use(cors({ origin: ["http://localhost:3000", "http://localhost:5000"] }));
 // app.use(cors({ origin: "http://localhost:3000" }));
 
 console.log(path.join(__dirname, 'uploads'));
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use('/server/uploads',express.static(path.join(__dirname,'uploads')));
 
 // On Production mode
 if (process.env.NODE_ENV === 'production') {
