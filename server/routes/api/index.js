@@ -3,7 +3,6 @@ const userRoutes = require('./userRoutes');
 const orderRoutes = require('./orderRoutes');
 const printSizeRoutes = require('./printSizeRoutes');
 const pictureRoutes = require('./pictureRoutes');
-const uploadRoutes = require('./uploadsRoutes');
 
 router.use('/users', userRoutes);
 router.use('/orders', orderRoutes);

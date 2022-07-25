@@ -2,12 +2,15 @@ const multer = require('multer');
 
 // set storage
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads');
-},
-filename: (req, file, cb) => {
+
+  /* UNCOMMENT TO SAVE TO 'uploads' FOLDER */
+  //   destination: (req, file, cb) => {
+  //     cb(null, 'uploads');
+  // },
+
+  filename: (req, file, cb) => {
     cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
-}
+  }
 });
 
 const imgFileFilter = (req, file, cb) => {
@@ -21,9 +24,9 @@ const imgFileFilter = (req, file, cb) => {
 
 const upload = multer(
   {
-    storage: storage, 
+    storage: storage,
     fileFilter: imgFileFilter
   }
 );
 
-module.exports = {upload};
+module.exports = { upload };

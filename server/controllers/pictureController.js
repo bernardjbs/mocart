@@ -13,37 +13,38 @@ module.exports = {
     };
   },
 
-  // uploadPictures (req, res, next) {
-  //   const files = req.files;
-  //   let filepath = '';
-  //   let result = files.map(async (file, index) => {
-  //     filepath = file.path.replace(/\\/g, '/') // convert the backslash to forward slash
-  //     let img = fs.readFileSync(file.path)
-  //     const img_base64 = img.toString('base64')
-  //     const picture = new Picture({
-  //       filename: files[index].originalname,
-  //       contentType: files[index].mimetype,
-  //       imageBase64: img_base64,
-  //       filepath: `${SERVER_URI}/${filepath}`,
-  //     });
+  uploadPictures (req, res, next) {
+    const files = req.files;
+    console.log(files)
+    let filepath = '';
+    let result = files.map(async (file, index) => {
+      filepath = file.path.replace(/\\/g, '/') // convert the backslash to forward slash
+      let img = fs.readFileSync(file.path)
+      const img_base64 = img.toString('base64')
+      const picture = new Picture({
+        filename: files[index].originalname,
+        contentType: files[index].mimetype,
+        imageBase64: img_base64,
+        filepath: `${SERVER_URI}/${filepath}`,
+      });
 
-  //     return picture
-  //     .save()
-  //     .then(() => {
-  //         return { msg : `${files[index].originalname} Uploaded Successfully...!`}
-  //     })
-  //     .catch(error =>{
-  //         if(error){
-  //             return Promise.reject({ error : error.message || `Cannot Upload ${files[index].originalname} Something Missing!`})
-  //         }
-  //     })
-  //   });
-  //   Promise.all(result)
-  //   .then( msg => {
-  //       res.json(msg);
-  //   })
-  //   .catch(err =>{
-  //       res.json(err);
-  //   })
-  // },
+      return picture
+      .save()
+      .then(() => {
+          return { msg : `${files[index].originalname} Uploaded Successfully...!`}
+      })
+      .catch(error =>{
+          if(error){
+              return Promise.reject({ error : error.message || `Cannot Upload ${files[index].originalname} Something Missing!`})
+          }
+      })
+    });
+    Promise.all(result)
+    .then( msg => {
+        res.json(msg);
+    })
+    .catch(err =>{
+        res.json(err);
+    })
+  },
 };
