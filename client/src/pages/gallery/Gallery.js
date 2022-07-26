@@ -21,22 +21,39 @@ function Gallery() {
     return reducedAmount
   }
 
+  const handleItemSize = (itemSelectedSize, itemSize) => {
+    setCartItems(prev => {
+      // 1. Is the item already added in the cart?
+      const isItemInCart = prev.find(item => item._id === itemSelectedSize._id);
+
+      if (isItemInCart) {
+        const items = prev.map(item => 
+          item._id === itemSelectedSize._id
+            ? { ...item, size: itemSize }
+            : item
+        );
+        return items;
+      }
+      // First time the Select value is set
+      return [...prev, { ...itemSelectedSize, size: 'Size' }];
+    });
+  }
   const handleAddToCart = (clickedItem) => {
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item._id === clickedItem._id);
 
       if (isItemInCart) {
-        const items = prev.map(item =>
+        const items = prev.map(item => 
           item._id === clickedItem._id
             ? { ...item, amount: item.amount + 1 }
             : item
         );
+        console.log(items)
         return items;
       }
-      // First time the item is added
-      
-      return [...prev, { ...clickedItem, amount: 1 }];
+      // First time the item is added, initialize the amount and the size
+      return [...prev, {...clickedItem, amount: 1, size:'Size'}];
     });
   };
 
@@ -78,7 +95,7 @@ function Gallery() {
   const getPictureFiles = useCallback(async () => {
     try {
       const { data } = await axios.get(`${URI}/api/picture/pictures`);
-      console.log(data)
+      // console.log(data)
       setGetPicturesData(data);
       return data;
     } catch (error) {
@@ -133,6 +150,7 @@ function Gallery() {
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
+          addSizeToItem={handleItemSize}
         />
       </Drawer>
       <Button onClick={() => setCartOpen(true)}>

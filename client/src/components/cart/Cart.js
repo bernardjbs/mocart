@@ -2,7 +2,7 @@ import React from 'react';
 import CartItem from '../../components/cartItem/CartItem'
 import Button from '@mui/material/Button';
 
-function Cart({cartItems, addToCart, removeFromCart}) {
+function Cart({cartItems, addToCart, removeFromCart, addSizeToItem}) {
   return (
     <>
       <h2>Your Shopping Cart</h2>
@@ -13,8 +13,10 @@ function Cart({cartItems, addToCart, removeFromCart}) {
           item={item}
           addToCart={addToCart}
           removeFromCart={removeFromCart}
+          addSizeToItem={addSizeToItem}
         />
       ))}
+      {/* {console.log(cartItems)} */}
       {/* <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2> */}
     </>
   );

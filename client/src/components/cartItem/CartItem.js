@@ -3,7 +3,7 @@ import './cartItem.css';
 import Button from '@mui/material/Button';
 import ItemOrder from '../itemOrder/ItemOrder';
 
-function CartItem({ item, addToCart, removeFromCart }) {
+function CartItem({ item, addToCart, removeFromCart, addSizeToItem }) {
 
 
   return (
@@ -33,7 +33,9 @@ function CartItem({ item, addToCart, removeFromCart }) {
             +
           </Button>
           <ItemOrder
+            item={item}
             quantity={item.amount}
+            addSizeToItem={addSizeToItem}
           />
         </div>
       </div>

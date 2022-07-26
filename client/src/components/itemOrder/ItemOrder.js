@@ -3,8 +3,9 @@ import axios from 'axios';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
-function Dropdown({ quantity }) {
+function ItemOrder({ item, quantity }) {
 
+ 
 
   const [sizes, setSizes] = useState([]);
   const [price, setPrice] = useState('');
@@ -28,14 +29,6 @@ function Dropdown({ quantity }) {
     getSizes();
   }, []);
 
-  const initialPrice = () => {
-    let initialPrice
-    if (sizes.length > 0) {
-      initialPrice = sizes[0].price
-    }
-    return initialPrice
-  }
-
   const itemSubTotal = () => {
     return price * quantity;
   }
@@ -44,7 +37,8 @@ function Dropdown({ quantity }) {
     const idx = e.target.selectedIndex;
     const option = e.target.querySelectorAll('option')[idx];
     const dataPrice = option.getAttribute('data-price');
-    setPrice(dataPrice)
+    setPrice(dataPrice);
+    item.size = e.target.value;
   }
 
   return (
@@ -56,7 +50,7 @@ function Dropdown({ quantity }) {
           { selectPrice(e) }
         }}
       >
-        <option>Size</option>
+        <option>{item.size}</option>
         {sizes.map((size) => (
           <option className='price-option' key={size.id} value={size.value} data-price={size.price}>
             {size.label}
@@ -71,4 +65,4 @@ function Dropdown({ quantity }) {
   );
 };
 
-export default Dropdown;
+export default ItemOrder;
