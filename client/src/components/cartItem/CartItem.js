@@ -3,7 +3,7 @@ import './cartItem.css';
 import Button from '@mui/material/Button';
 import ItemOrder from '../itemOrder/ItemOrder';
 
-function CartItem({ item, addToCart, removeFromCart, addSizeToItem }) {
+function CartItem({ item, addToCart, removeFromCart, handlePrice }) {
 
 
   return (
@@ -18,7 +18,9 @@ function CartItem({ item, addToCart, removeFromCart, addSizeToItem }) {
             sx={{ minWidth: 30, padding: 0.5, margin: 1 }}
             disableElevation
             variant='contained'
-            onClick={() => removeFromCart(item._id)}
+            onClick={() => {
+              removeFromCart(item._id)
+            }}
           >
             -
           </Button>
@@ -34,8 +36,7 @@ function CartItem({ item, addToCart, removeFromCart, addSizeToItem }) {
           </Button>
           <ItemOrder
             item={item}
-            quantity={item.amount}
-            addSizeToItem={addSizeToItem}
+            handlePrice={handlePrice}            
           />
         </div>
       </div>

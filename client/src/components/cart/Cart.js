@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CartItem from '../../components/cartItem/CartItem'
 import Button from '@mui/material/Button';
 
-function Cart({cartItems, addToCart, removeFromCart, addSizeToItem}) {
+function Cart({ cartItems, addToCart, removeFromCart, handlePrice }) {
+
+  // const getTotal = (total) => { }
+
+  const calculateTotal = (items) =>
+    items.reduce((acc, item) => acc + item.amount * item.price, 0);
   return (
     <>
       <h2>Your Shopping Cart</h2>
@@ -13,11 +18,11 @@ function Cart({cartItems, addToCart, removeFromCart, addSizeToItem}) {
           item={item}
           addToCart={addToCart}
           removeFromCart={removeFromCart}
-          addSizeToItem={addSizeToItem}
+          handlePrice={handlePrice}
         />
       ))}
-      {/* {console.log(cartItems)} */}
-      {/* <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2> */}
+      {console.log(cartItems)}
+      <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
     </>
   );
 };

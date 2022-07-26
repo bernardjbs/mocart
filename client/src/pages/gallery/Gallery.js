@@ -21,23 +21,23 @@ function Gallery() {
     return reducedAmount
   }
 
-  const handleItemSize = (itemSelectedSize, itemSize) => {
+  const handlePrice = (selectedItem) => {
+    console.log("i am here")
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
-      const isItemInCart = prev.find(item => item._id === itemSelectedSize._id);
+      const isItemInCart = prev.find(item => item._id === selectedItem._id);
 
       if (isItemInCart) {
         const items = prev.map(item => 
-          item._id === itemSelectedSize._id
-            ? { ...item, size: itemSize }
+          item._id === selectedItem._id
+            ? { ...item, price: selectedItem.price }
             : item
         );
         return items;
       }
-      // First time the Select value is set
-      return [...prev, { ...itemSelectedSize, size: 'Size' }];
     });
-  }
+  };
+
   const handleAddToCart = (clickedItem) => {
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
@@ -49,7 +49,6 @@ function Gallery() {
             ? { ...item, amount: item.amount + 1 }
             : item
         );
-        console.log(items)
         return items;
       }
       // First time the item is added, initialize the amount and the size
@@ -150,7 +149,7 @@ function Gallery() {
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
-          addSizeToItem={handleItemSize}
+          handlePrice={handlePrice}
         />
       </Drawer>
       <Button onClick={() => setCartOpen(true)}>
