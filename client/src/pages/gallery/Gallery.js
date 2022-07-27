@@ -12,7 +12,7 @@ import { Badge, Button, Drawer, Grid } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
-
+const STRIPE_KEY = process.env.REACT_APP_STRIPE;
 
 function Gallery() {
 
@@ -22,7 +22,7 @@ function Gallery() {
   }
 
   const handlePrice = (selectedItem) => {
-    console.log("i am here")
+    // console.log("i am here")
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item._id === selectedItem._id);
@@ -151,6 +151,7 @@ function Gallery() {
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
           handlePrice={handlePrice}
+          stripeKey={STRIPE_KEY}
         />
       </Drawer>
       <Button onClick={() => setCartOpen(true)}>

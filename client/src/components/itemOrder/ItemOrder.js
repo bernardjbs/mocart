@@ -52,7 +52,7 @@ function ItemOrder({ item, handlePrice }) {
   }
 
   const setOption = (itemSize) => {
-    console.log(itemSize)
+    // console.log(itemSize)
     if (itemSize === 'Size') {
       return 'Size'
     }
