@@ -13,19 +13,6 @@ function Cart({ cartItems, addToCart, removeFromCart, handlePrice, stripeKey }) 
   const onToken = (token) => {
     setStripeToken(token);
   }
-  // const getTotal = (total) => { }
-
-  // const paymentRequest = async () => {
-  //   try {
-  //     console.log(stripeToken)
-  //     const res = await axios.post(`${URI}/api/checkout/payment`, {
-  //       stripeTokenId: stripeToken.id,
-  //       amount: 100
-  //     });
-  //   } catch (error) {
-  //     throw error;
-  //   };
-  // };
 
   useEffect(() => {
     const paymentRequest = async () => {
@@ -38,11 +25,6 @@ function Cart({ cartItems, addToCart, removeFromCart, handlePrice, stripeKey }) 
     };
     stripeToken && paymentRequest();
   }, [stripeToken]);
-
-  // useEffect(() => {
-  //   paymentRequest();
-  //   stripeToken && paymentRequest()
-  // },[stripeToken]);
 
   const calculateTotal = (items) =>
     items.reduce((acc, item) => acc + item.amount * item.price, 0);
