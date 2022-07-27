@@ -7,7 +7,7 @@ import CartItem from '../../components/cartItem/CartItem';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
-function Cart({ cartItems, addToCart, removeFromCart, handlePrice, stripeKey }) {
+function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePrice, stripeKey }) {
   const [stripeToken, setStripeToken] = useState(null);
 
   const onToken = (token) => {
@@ -40,6 +40,7 @@ function Cart({ cartItems, addToCart, removeFromCart, handlePrice, stripeKey }) 
           addToCart={addToCart}
           removeFromCart={removeFromCart}
           handlePrice={handlePrice}
+          setSelectedSize={setSelectedSize}
         />
       ))}
       {/* {console.log(cartItems)} */}

@@ -6,8 +6,8 @@ const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_U
 function ItemOrder({ item, handlePrice }) {
 
   const [sizes, setSizes] = useState([]);
-  // const [price, setPrice] = useState('');
-  const [value, setValue] = useState('');
+  const [price, setPrice] = useState(2.5);
+  const [selectValue, setSelectValue] = useState('');
 
   const getSizes = async () => {
     // Fetch data
@@ -28,16 +28,24 @@ function ItemOrder({ item, handlePrice }) {
   }, []);
 
   useEffect(() => {
-    if (item.isItemNew === 'yes') {
-      item.price = 2.5;      
+
+    console.log('price initial: ' + item.price)
+    setSelectValue(item.size)
+    if (item.price === undefined) {
+      item.price = price;
+    } else {
+      setPrice(item.price);
     }
-    handlePrice(item);
+    handlePrice(item)
   },[])
 
   const itemSubTotal = () => {
+    if (price === undefined) {
+      setPrice(item.price);
+    }
     const calcPrice = item.price * item.amount
     if (calcPrice) {
-      return item.price * item.amount;
+      return calcPrice;
     }
     else return 0;
   }
@@ -48,30 +56,21 @@ function ItemOrder({ item, handlePrice }) {
     const dataPrice = option.getAttribute('data-price');
     item.size = e.target.value;
     item.price = dataPrice;
+    item.test = 'test'
+    setPrice(dataPrice);
     handlePrice(item);
-  }
-
-  const setOption = (itemSize) => {
-    // console.log(itemSize)
-    if (itemSize === 'Size') {
-      return 'Size'
-    }
-    else {
-      return itemSize;
-    }
   }
 
   return (
     <>
       <select
         className='select-size'
-        value={value}
+        value={selectValue}
         onChange={(e) => {
-          setValue(e.currentTarget.value)
+          setSelectValue(e.currentTarget.value)
           selectPrice(e) 
         }}
       >
-        {/* <option>{setOption(item.size)}</option> */}
         {sizes.map((size) => (
           <option className='price-option' key={size.id} value={size.value} data-price={size.price}>
             {size.label}
@@ -80,7 +79,6 @@ function ItemOrder({ item, handlePrice }) {
         )}
       </select>
       ${itemSubTotal().toFixed(2)}
-
     </>
 
   );

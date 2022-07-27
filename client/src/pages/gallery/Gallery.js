@@ -21,6 +21,22 @@ function Gallery() {
     return reducedAmount
   }
 
+  const handleSelectedSize = (selectedItem) => {
+    console.log("i am here - handleSelectedSize() Gallery.js")
+    setCartItems(prev => {
+      // 1. Is the item already added in the cart?
+      const isItemInCart = prev.find(item => item._id === selectedItem._id);
+
+      if (isItemInCart) {
+        const items = prev.map(item => 
+          item._id === selectedItem._id
+            ? { ...item, selectedSize: selectedItem.size }
+            : item
+        );
+        return items;
+      }
+    });
+  };
   const handlePrice = (selectedItem) => {
     // console.log("i am here")
     setCartItems(prev => {
@@ -152,6 +168,7 @@ function Gallery() {
           removeFromCart={handleRemoveFromCart}
           handlePrice={handlePrice}
           stripeKey={STRIPE_KEY}
+          setSelectedSize={handleSelectedSize}
         />
       </Drawer>
       <Button onClick={() => setCartOpen(true)}>
