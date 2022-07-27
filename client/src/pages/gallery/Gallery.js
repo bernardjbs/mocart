@@ -51,8 +51,9 @@ function Gallery() {
         );
         return items;
       }
+      
       // First time the item is added, initialize the amount and the size
-      return [...prev, {...clickedItem, amount: 1, size:'Size'}];
+      return [...prev, {...clickedItem, amount: 1, isItemNew:'yes'}];
     });
   };
 

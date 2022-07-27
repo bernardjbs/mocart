@@ -28,7 +28,9 @@ function ItemOrder({ item, handlePrice }) {
   }, []);
 
   useEffect(() => {
-    item.price = 2.5;
+    if (item.isItemNew === 'yes') {
+      item.price = 2.5;      
+    }
     handlePrice(item);
   },[])
 
