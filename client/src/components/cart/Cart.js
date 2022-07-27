@@ -19,7 +19,7 @@ function Cart({ cartItems, addToCart, removeFromCart, handlePrice, stripeKey }) 
       try {
         const res = await axios.post(`${URI}/api/checkout/payment`, {
           stripeTokenId: stripeToken.id,
-          amount: 500,
+          amount: totalAmount * 100, // Multiply by 100 - Stripe use cents
         });
       } catch {}
     };
@@ -49,7 +49,7 @@ function Cart({ cartItems, addToCart, removeFromCart, handlePrice, stripeKey }) 
         billingAddress
         shippingAddress
         description='Your total is '{...totalAmount}
-        amount={1 * 100} // Multiply by 100 - Stripe use cents
+        amount={totalAmount * 100} // Multiply by 100 - Stripe use cents
         token={onToken}
         stripeKey={stripeKey}
       >
