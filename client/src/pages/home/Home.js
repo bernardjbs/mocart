@@ -3,10 +3,18 @@ import { useUserContext } from '../../utils/userContext';
 
 function Home() {
   const loggedInUser = useUserContext();
+  const test = () => {
+    if (loggedInUser === '') {
+      console.log("null")
+    } else {
+      console.log(loggedInUser)
+    }
+  }
   return (
   
     <div>
-        {console.log(loggedInUser.data.userType)}
+      
+        {test()}
         <p>Home page</p>
       </div>
     
