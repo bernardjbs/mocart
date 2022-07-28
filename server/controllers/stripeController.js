@@ -5,7 +5,7 @@ module.exports = {
       stripe.charges.create(
         {
           source: req.body.stripeTokenId,
-          quantity: req.body.quantity,
+          amount: req.body.amount,
           currency: "aud",
         },
         (stripeErr, stripeRes) => {

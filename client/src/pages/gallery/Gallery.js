@@ -17,7 +17,7 @@ const STRIPE_KEY = process.env.REACT_APP_STRIPE;
 function Gallery() {
 
   const getTotalItems = (items) => {
-    const reducedAmount = items.reduce((acc, item) => acc + item.quantity, 0);
+    const reducedAmount = items.reduce((acc, item) => acc + item.amount, 0);
     return reducedAmount
   }
 
@@ -62,14 +62,14 @@ function Gallery() {
       if (isItemInCart) {
         const items = prev.map(item => 
           item._id === clickedItem._id
-            ? { ...item, quantity: item.quantity + 1, id: clickedItem._id }
+            ? { ...item, amount: item.amount + 1, id: clickedItem._id }
             : item
         );
         return items;
       }
       
-      // First time the item is added, initialize the quantity and the size
-      return [...prev, {...clickedItem, quantity: 1, id: clickedItem._id}];
+      // First time the item is added, initialize the amount and the size
+      return [...prev, {...clickedItem, amount: 1, id: clickedItem._id}];
     });
   };
 
@@ -77,8 +77,8 @@ function Gallery() {
     setCartItems(prev =>
       prev.reduce((acc, item) => {
         if (item._id === id) {
-          if (item.quantity === 1) return acc;
-          return [...acc, { ...item, quantity: item.quantity - 1 }];
+          if (item.amount === 1) return acc;
+          return [...acc, { ...item, amount: item.amount - 1 }];
         } else {
           return [...acc, item];
         }

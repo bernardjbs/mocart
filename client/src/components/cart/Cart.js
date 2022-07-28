@@ -26,10 +26,10 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
   useEffect(() => {
     const paymentRequest = async () => {
       try {
-      //   const res = await axios.post(`${URI}/api/checkout/payment`, {
-      //     stripeTokenId: stripeToken.id,
-      //     quantity: totalAmount * 100, // Multiply by 100 - Stripe use cents
-      //   });
+        const res = await axios.post(`${URI}/api/checkout/payment`, {
+          stripeTokenId: stripeToken.id,
+          amount: totalAmount * 100, // Multiply by 100 - Stripe use cents
+        });
         // todo: Save Order
         console.log(cartItems)
         routeChange()
@@ -39,7 +39,7 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
   }, [stripeToken]);
 
   const calculateTotal = (items) =>
-    items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+    items.reduce((acc, item) => acc + item.amount * item.price, 0);
   const totalAmount = calculateTotal(cartItems).toFixed(2);
 
   return (
@@ -68,7 +68,7 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
         billingAddress
         shippingAddress
         description='Your total is '{...totalAmount}
-        quantity={totalAmount * 100} // Multiply by 100 - Stripe use cents
+        amount={totalAmount * 100} // Multiply by 100 - Stripe use cents
         token={onToken}
         stripeKey={stripeKey}
       >

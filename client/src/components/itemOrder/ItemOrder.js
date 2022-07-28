@@ -41,7 +41,7 @@ function ItemOrder({ item, handlePrice }) {
     if (price === undefined) {
       setPrice(item.price);
     }
-    const calcPrice = item.price * item.quantity
+    const calcPrice = item.price * item.amount
     if (calcPrice) {
       return calcPrice;
     }
