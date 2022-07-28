@@ -16,7 +16,6 @@ const userSchema = new Schema(
     password: String,
     firstName: String,
     lastName: String,
-    address: String,
     userType: String, 
     orders: [
       {

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
-import Button from '@mui/material/Button';
+import { Button, TextareaAutosize } from '@mui/material';
+
+// import Success from '../../components/success/Success';
+import Success from '../../pages/success/Success';
 
 import CartItem from '../../components/cartItem/CartItem';
 
@@ -14,21 +18,30 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
     setStripeToken(token);
   }
 
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/`; 
+    navigate(path);
+  }
   useEffect(() => {
     const paymentRequest = async () => {
       try {
-        const res = await axios.post(`${URI}/api/checkout/payment`, {
-          stripeTokenId: stripeToken.id,
-          amount: totalAmount * 100, // Multiply by 100 - Stripe use cents
-        });
-      } catch {}
+      //   const res = await axios.post(`${URI}/api/checkout/payment`, {
+      //     stripeTokenId: stripeToken.id,
+      //     quantity: totalAmount * 100, // Multiply by 100 - Stripe use cents
+      //   });
+        // todo: Save Order
+        console.log(cartItems)
+        routeChange()
+      } catch { }
     };
     stripeToken && paymentRequest();
   }, [stripeToken]);
 
   const calculateTotal = (items) =>
-    items.reduce((acc, item) => acc + item.amount * item.price, 0);
+    items.reduce((acc, item) => acc + item.quantity * item.price, 0);
   const totalAmount = calculateTotal(cartItems).toFixed(2);
+
   return (
     <>
       <h2>Your Shopping Cart</h2>
@@ -45,12 +58,17 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
       ))}
       {/* {console.log(cartItems)} */}
       <h2>Total: ${totalAmount}</h2>
+      <TextareaAutosize
+        aria-label="empty textarea"
+        placeholder="Add a note"
+        style={{ width: 200 }}
+      />
       <StripeCheckout
         name='Pictura'
         billingAddress
         shippingAddress
         description='Your total is '{...totalAmount}
-        amount={totalAmount * 100} // Multiply by 100 - Stripe use cents
+        quantity={totalAmount * 100} // Multiply by 100 - Stripe use cents
         token={onToken}
         stripeKey={stripeKey}
       >

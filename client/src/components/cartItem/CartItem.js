@@ -24,7 +24,7 @@ function CartItem({ item, addToCart, removeFromCart, handlePrice, setSelectedSiz
           >
             -
           </Button>
-          <p>{item.amount}</p>
+          <p>{item.quantity}</p>
           <Button
             size='small'
             sx={{ minWidth: 30, padding: 0.5, margin: 1 }}

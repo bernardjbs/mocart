@@ -3,7 +3,7 @@ import './nav.css';
 import logo from '../../assets/img/sflogo.jpg';
 import Auth from '../../utils/auth';
 
-function Nav({ currentPage, handlePageChange }) {
+function Nav() {
   return (
     <section className="nav-bar">
       <div>
@@ -12,26 +12,26 @@ function Nav({ currentPage, handlePageChange }) {
       <nav>
         <ul>
           <li>
-            <a className="nav-text" href="#home" onClick={() => handlePageChange('Home')}>Home</a>
+            <a className="nav-text" href="/" >Home</a>
           </li>
           <li>
-            <a className="nav-text" href="#gallery" onClick={() => handlePageChange('Gallery')}>Gallery</a>
+            <a className="nav-text" href="gallery" >Gallery</a>
           </li>
           <li>
-            <a className="nav-text" href="#contact" onClick={() => handlePageChange('Contact')}>Contact</a>
+            <a className="nav-text" href="contact" >Contact</a>
           </li>
 
           {Auth.loggedIn() ? (
             <li>
-              <a className="nav-text" href="#logout" onClick={() => handlePageChange('Logout')}>Logout</a>
+              <a className="nav-text" href="logout" >Logout</a>
             </li>
           ) : (
             <React.Fragment>
               <li>
-                <a className="nav-text" href="#login" onClick={() => handlePageChange('Login')}>Login</a>
+                <a className="nav-text" href="login" >Login</a>
               </li>
               <li>
-                <a className="nav-text" href="#signup" onClick={() => handlePageChange('SignUp')}>Sign Up</a>
+                <a className="nav-text" href="signup" >Sign Up</a>
               </li>
             </ React.Fragment>
           )}

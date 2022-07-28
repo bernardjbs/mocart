@@ -1,10 +1,26 @@
 import './App.css';
-import MocartContainer from './components/mocartContainter/MocartContainer'
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
+import Home from './pages/home/Home'
+import Gallery from './pages/gallery/Gallery'
+import Nav from './components/nav/Nav'
+
 function App() {
   return (
-    <div className="mocart-app">
-      <MocartContainer />
-    </div>
+    <>
+      <Nav />
+      <Router>
+        <Routes>
+          <Route exact path='/' element={<Home/>}>
+          </Route>
+          <Route path="/gallery" element={<Gallery/>}>
+          </Route>
+        </Routes>
+      </Router>
+      {/* <MocartContainer /> */}
+    </>
   );
 }
 

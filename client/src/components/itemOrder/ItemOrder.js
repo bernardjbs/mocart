@@ -28,8 +28,6 @@ function ItemOrder({ item, handlePrice }) {
   }, []);
 
   useEffect(() => {
-
-    console.log('price initial: ' + item.price)
     setSelectValue(item.size)
     if (item.price === undefined) {
       item.price = price;
@@ -43,7 +41,7 @@ function ItemOrder({ item, handlePrice }) {
     if (price === undefined) {
       setPrice(item.price);
     }
-    const calcPrice = item.price * item.amount
+    const calcPrice = item.price * item.quantity
     if (calcPrice) {
       return calcPrice;
     }
