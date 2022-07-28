@@ -17,14 +17,11 @@ const printSchema = new Schema(
   }
 )
 
+
 // Order Schema binding prints schema used to create model
 const orderSchema = new Schema(
   {
     prints: [printSchema],
-    delivery: {
-      type: String,
-      required: true,
-    },
     note: String,
     status: String, // Open, Complete, Delivered, In Progress
   },

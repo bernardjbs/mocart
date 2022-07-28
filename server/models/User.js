@@ -1,6 +1,29 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const shippingSchema = new Schema(
+  {
+    street: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    postalCode: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+    country: {
+      type: String,
+      required: true
+    },
+  },
+);
+
 // Schema to create User model
 const userSchema = new Schema(
   {
@@ -23,7 +46,28 @@ const userSchema = new Schema(
         ref: 'order'
       },
     ], 
-    
+    shippingDetails: [
+      {
+        street: {
+          type: String,
+          required: true,
+        },
+        city: {
+          type: String,
+          required: true,
+        },
+        postalCode: {
+          type: String,
+        },
+        state: {
+          type: String,
+        },
+        country: {
+          type: String,
+          required: true
+        },
+      },
+    ],
   },
   {
     // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.

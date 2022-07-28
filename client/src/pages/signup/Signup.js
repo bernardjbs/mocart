@@ -16,18 +16,27 @@ function Signup() {
     setsignupFormState({
       ...signupFormState,
       [name]: value,
-    }); 
+    });
   };
- 
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await Axios.post(`${URI}/api/users/signup`, {
         email: signupFormState.email,
-        password: signupFormState.password, 
+        password: signupFormState.password,
         firstName: signupFormState.firstName,
-        lastName: signupFormState.lastName, 
-        userType: 'User'
+        lastName: signupFormState.lastName,
+        userType: 'User',
+        shippingDetails: [
+          {
+            street: signupFormState.street,
+            city: signupFormState.city,
+            postalCode: signupFormState.postalCode,
+            state: signupFormState.state,
+            country: signupFormState.country,
+          }
+        ]
       });
 
       // signup the user and redirect to homepage
@@ -70,6 +79,47 @@ function Signup() {
           name="password"
           type="password"
           value={signupFormState.password || ''}
+          onChange={handleChange}
+        />
+        <h2>Shipping Details</h2>
+        <input
+          className="form-input"
+          placeholder="Street"
+          name="street"
+          type="text"
+          value={signupFormState.street || ''}
+          onChange={handleChange}
+        />
+        <input
+          className="form-input"
+          placeholder="City"
+          name="city"
+          type="text"
+          value={signupFormState.city || ''}
+          onChange={handleChange}
+        />
+        <input
+          className="form-input"
+          placeholder="Postal Code"
+          name="postalCode"
+          type="text"
+          value={signupFormState.postalCode || ''}
+          onChange={handleChange}
+        />
+        <input
+          className="form-input"
+          placeholder="State"
+          name="state"
+          type="text"
+          value={signupFormState.state || ''}
+          onChange={handleChange}
+        />
+        <input
+          className="form-input"
+          placeholder="Country"
+          name="country"
+          type="text"
+          value={signupFormState.country || ''}
           onChange={handleChange}
         />
         <button

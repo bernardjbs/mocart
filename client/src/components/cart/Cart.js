@@ -65,9 +65,7 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
       />
       <StripeCheckout
         name='Pictura'
-        billingAddress
-        shippingAddress
-        description='Your total is '{...totalAmount}
+        description='Please enter card details'
         amount={totalAmount * 100} // Multiply by 100 - Stripe use cents
         token={onToken}
         stripeKey={stripeKey}

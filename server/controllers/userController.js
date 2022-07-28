@@ -5,7 +5,7 @@ module.exports = {
   // Get all users
   async getUsers(req, res) {
     try {
-      const users = await User.find();
+      const users = await User.find().populate('shippingDetails');
       res.status(200).json(users);
     } catch (err) {
       res.status(500).json({ message: 'Your request could not be performed, please try again', body: err });
