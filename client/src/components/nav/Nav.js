@@ -3,7 +3,12 @@ import './nav.css';
 import logo from '../../assets/img/sflogo.jpg';
 import Auth from '../../utils/auth';
 
+
 function Nav() {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
   return (
     <section className="nav-bar">
       <div>
@@ -23,7 +28,7 @@ function Nav() {
 
           {Auth.loggedIn() ? (
             <li>
-              <a className="nav-text" href="logout" >Logout</a>
+              <a className="nav-text" href="logout" onClick={logout}>Logout</a>
             </li>
           ) : (
             <React.Fragment>

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { useUserContext } from '../../utils/userContext';
 
 function Home() {
-
+  const loggedInUser = useUserContext();
   return (
   
-      <div>
+    <div>
+        {console.log(loggedInUser.data.userType)}
         <p>Home page</p>
       </div>
     
