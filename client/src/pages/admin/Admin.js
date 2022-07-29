@@ -4,7 +4,7 @@ function Admnin() {
 
   return (
     <>
-      
+      Admin
     </>
   )
 };

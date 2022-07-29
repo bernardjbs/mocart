@@ -4,7 +4,7 @@ function Customer() {
 
   return (
     <>
-      
+      Customer
     </>
   )
 };

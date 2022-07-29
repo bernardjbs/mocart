@@ -4,9 +4,6 @@ import Auth from './auth';
 // Initialize new context for users
 const UserContext = createContext();
 
-// We create a custom hook to provide immediate usage of the user context in other components
-export const useUserContext = () => useContext(UserContext);
-
 // UserProvider component that holds initial state, returns provider component
 export const UserProvider = ({ children }) => {
   let loggedInUser 
@@ -17,9 +14,11 @@ export const UserProvider = ({ children }) => {
   }
   // Provider components expect a value prop to be passed
   return (
-    <UserContext.Provider value={loggedInUser}>
+    <UserContext.Provider value={loggedInUser.data}>
       {/* Render children passed from props */}
       {children}
     </UserContext.Provider>
   );
 };
+
+export default UserContext;
