@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-// import { useUserContext } from '../../utils/userContext';
+import Nav from '../../components/nav/Nav'
+
 import useUserContext from '../../hooks/useUserContext';
 
 function Home() {
@@ -8,7 +9,7 @@ function Home() {
 
   return (
     <>
-
+      <Nav />
     </>
   )
 };

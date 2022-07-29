@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Nav from '../../components/nav/Nav'
 
 import './gallery.css'
 import Auth from '../../utils/auth';
@@ -144,6 +145,7 @@ function Gallery() {
 
   return (
     <>
+      <Nav />
       <div className="row">
         <div className="col-6">
           <div className="form-group">

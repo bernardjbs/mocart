@@ -1,10 +1,14 @@
 import React from 'react';
+import Nav from '../../components/nav/Nav'
 
 function Contact() {
   return (
-    <div>
-      <p>Contact page</p>
-    </div>
+    <>
+      <Nav />
+      <div>
+        <p>Contact page</p>
+      </div>
+    </>
   );
 };
 

@@ -13,14 +13,12 @@ import Missing from './pages/missing/Missing'
 import MainContainer from './components/mainContainter/MainContainer';
 import RequireAuth from './components/RequireAuth';
 
-import Nav from './components/nav/Nav'
 import Auth from '../src/utils/auth';
 
 
 function App() {
   return (
     <>
-      <Nav />
       <Routes>
         <Route exact path='/' element={<MainContainer />}>
           {/* Public routes */}

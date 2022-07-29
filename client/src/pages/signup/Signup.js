@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Axios from 'axios';
 import Auth from '../../utils/auth';
+import Nav from '../../components/nav/Nav'
+
 
 // Todo: Perform check if password is correct by matching another entry, also check if password is valid by regex - maybe in user model schema validation? 
 
@@ -47,7 +49,9 @@ function Signup() {
   }
 
   return (
-    <div className="signup-form">
+    <>
+      <Nav />
+      <div className="signup-form">
       <form onSubmit={handleFormSubmit}>
         <input
           className="form-input"
@@ -132,6 +136,8 @@ function Signup() {
       </form>
 
     </div>
+    </>
+    
   );
 };
 
