@@ -3,7 +3,6 @@ import './nav.css';
 import logo from '../../assets/img/sflogo.jpg';
 import Auth from '../../utils/auth';
 
-
 function Nav() {
   const logout = (event) => {
     event.preventDefault();
