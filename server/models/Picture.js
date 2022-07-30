@@ -19,6 +19,10 @@ const pictureSchema = new Schema({
     type: String, 
     required: true
   },
+  userId: {
+    type: String,
+    required: true,
+  },
 });
 
 const Picture = model('picture', pictureSchema);

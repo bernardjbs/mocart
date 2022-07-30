@@ -20,9 +20,18 @@ const userSchema = new Schema(
       // validate: [validateEmail, 'Please fill a valid email address'],
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    password: String,
-    firstName: String,
-    lastName: String,
+    password: {
+      type: String, 
+      required: true,
+    },
+    firstName: {
+      type: String, 
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
     userType: String, 
 
     shippingDetails: [

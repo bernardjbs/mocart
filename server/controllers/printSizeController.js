@@ -16,8 +16,6 @@ module.exports = {
   async createPrintSize(req, res) {
     try {
       const newPrintSize = await PrintSize.create(req.body);
-
-      const token = signToken(newPrintSize);
       res.status(200).json({
         message: "Print Size successfully created", newPrintSize
       });

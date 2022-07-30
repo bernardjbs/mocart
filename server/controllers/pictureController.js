@@ -15,17 +15,22 @@ module.exports = {
 
   uploadPictures (req, res, next) {
     const files = req.files;
-    console.log(files)
     let filepath = '';
+    // console.log(req.body.userId) 
+
     let result = files.map(async (file, index) => {
       filepath = file.path.replace(/\\/g, '/') // convert the backslash to forward slash
       let img = fs.readFileSync(file.path)
       const img_base64 = img.toString('base64')
+      let userId = req.body.userId
+
+      console.log(userId[0])
       const picture = new Picture({
         filename: files[index].originalname,
         contentType: files[index].mimetype,
         imageBase64: img_base64,
         filepath: `${SERVER_URI}/${filepath}`,
+        userId: userId[0]
       });
 
       return picture
@@ -40,11 +45,13 @@ module.exports = {
       })
     });
     Promise.all(result)
-    .then( msg => {
-        res.json(msg);
+      .then(msg => {
+        userId = req.body.userId
+      res.json(msg);
     })
     .catch(err =>{
         res.json(err);
     })
+    
   },
 };

@@ -15,6 +15,11 @@ import { AddShoppingCart } from '@mui/icons-material';
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 const STRIPE_KEY = process.env.REACT_APP_STRIPE;
 
+let loggedInUser;
+if (Auth.loggedIn()) {
+  loggedInUser = Auth.getProfile().data;
+}
+
 function Gallery() {
 
   const getTotalItems = (items) => {
@@ -95,6 +100,7 @@ function Gallery() {
     const formData = new FormData();
     for (let i = 0; i < pictureFiles.length; i++) {
       formData.append('files', pictureFiles[i]);
+      formData.append('userId', loggedInUser._id);
     }
     await pictureFilesUpload(formData);
     getPictures();
