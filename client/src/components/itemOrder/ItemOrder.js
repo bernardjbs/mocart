@@ -3,9 +3,10 @@ import axios from 'axios';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
-function ItemOrder({ item, handlePrice }) {
+function ItemOrder({ item, handlePrice, handleSelectedSize }) {
 
   const [sizes, setSizes] = useState([]);
+  const [size, setSize] = useState('10x15');
   const [price, setPrice] = useState(2.5);
   const [selectValue, setSelectValue] = useState('');
 
@@ -28,14 +29,18 @@ function ItemOrder({ item, handlePrice }) {
   }, []);
 
   useEffect(() => {
+    const selectSize = document.querySelector('.select-size');
     setSelectValue(item.size)
     if (item.price === undefined) {
       item.price = price;
+      item.size = size;
     } else {
       setPrice(item.price);
+      setSize(item.size);
     }
-    handlePrice(item)
-  },[])
+    handlePrice(item);
+    handleSelectedSize(item);
+  }, [])
 
   const itemSubTotal = () => {
     if (price === undefined) {
@@ -57,6 +62,8 @@ function ItemOrder({ item, handlePrice }) {
     item.test = 'test'
     setPrice(dataPrice);
     handlePrice(item);
+    setSize(item.size);
+    handleSelectedSize(item);
   }
 
   return (

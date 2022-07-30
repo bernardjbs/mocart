@@ -4,23 +4,45 @@ import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { Button, TextareaAutosize } from '@mui/material';
 
-// import Success from '../../components/success/Success';
-import Success from '../../pages/success/Success';
-
 import CartItem from '../../components/cartItem/CartItem';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
-function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePrice, stripeKey }) {
+function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handlePrice, stripeKey }) {
   const [stripeToken, setStripeToken] = useState(null);
+  const [note, setNote] = useState('');
 
   const onToken = (token) => {
     setStripeToken(token);
   }
 
-  let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `/`; 
+  const handleNoteChange = (event) => {
+    const { value } = event.target;
+    setNote(value);
+  }
+  const saveOrder = async () => {
+    console.log(cartItems)
+    cartItems.forEach( async item => {
+      try {
+        const response = await axios.post(`${URI}/api/orders/neworder`, {
+          prints: [{
+            id: item._id, 
+            filename: item.filename, 
+            quantity: item.amount, 
+            size: item.size,
+          }],
+          note: note,
+          status: 'Open'
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }); 
+  };
+
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/`;
     navigate(path);
   }
   useEffect(() => {
@@ -30,9 +52,7 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
           stripeTokenId: stripeToken.id,
           amount: totalAmount * 100, // Multiply by 100 - Stripe use cents
         });
-        // todo: Save Order
-        console.log(cartItems)
-        routeChange()
+        routeChange();
       } catch { }
     };
     stripeToken && paymentRequest();
@@ -53,14 +73,17 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
           addToCart={addToCart}
           removeFromCart={removeFromCart}
           handlePrice={handlePrice}
-          setSelectedSize={setSelectedSize}
+          handleSelectedSize={handleSelectedSize}
         />
       ))}
       {/* {console.log(cartItems)} */}
       <h2>Total: ${totalAmount}</h2>
       <TextareaAutosize
-        aria-label="empty textarea"
-        placeholder="Add a note"
+        aria-label='textarea'
+        placeholder='Add a note'
+        name='note'
+        value={note || ''}
+        onChange={handleNoteChange}
         style={{ width: 200 }}
       />
       <StripeCheckout
@@ -70,7 +93,7 @@ function Cart({ cartItems, addToCart, removeFromCart, setSelectedSize, handlePri
         token={onToken}
         stripeKey={stripeKey}
       >
-        <Button>
+        <Button onClick={saveOrder}>
           Make Payment
         </Button>
       </StripeCheckout>

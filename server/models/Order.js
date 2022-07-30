@@ -3,8 +3,12 @@ const { Schema, model } = require('mongoose');
 const printSchema = new Schema(
   {
     id: {
-      type: Number,
+      type: Schema.Types.ObjectId,
       required: true,
+    },
+    filename: {
+      type: String, 
+      required: true
     },
     quantity: {
       type: Number,
@@ -22,8 +26,14 @@ const printSchema = new Schema(
 const orderSchema = new Schema(
   {
     prints: [printSchema],
-    note: String,
-    status: String, // Open, Complete, Delivered, In Progress
+    note: {
+      type: String, 
+    },
+    //status: Open, Complete, Delivered, In Progress
+    status: {
+      type: String,
+      required: true
+    },
   },
   {
     timestamps: true,

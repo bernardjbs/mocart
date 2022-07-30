@@ -170,7 +170,7 @@ function Gallery() {
           removeFromCart={handleRemoveFromCart}
           handlePrice={handlePrice}
           stripeKey={STRIPE_KEY}
-          setSelectedSize={handleSelectedSize}
+          handleSelectedSize={handleSelectedSize}
         />
       </Drawer>
       <Button onClick={() => setCartOpen(true)}>

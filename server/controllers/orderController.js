@@ -16,12 +16,9 @@ module.exports = {
   async createOrder(req, res) {
     try {
       const newOrder = await Order.create(req.body);
-
-      const token = signToken(newOrder);
       res.status(200).json({
-        message: "Order successfully created", token: token
+        message: "Order successfully created", order: newOrder
       });
-
     } catch (err) {
       res.status(400).json({ message: 'Your request could not be performed, please try again', body: err })
     };
