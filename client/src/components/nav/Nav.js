@@ -15,6 +15,7 @@ function Nav() {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
+    
   };
   return (
     <section className="nav-bar">

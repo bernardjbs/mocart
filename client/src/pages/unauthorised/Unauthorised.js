@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from "react-router-dom"
 
 import Nav from '../../components/nav/Nav'
-import Login from '../../pages/login/Login'
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
