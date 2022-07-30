@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
@@ -7,11 +6,11 @@ import Gallery from './pages/gallery/Gallery'
 import Contact from './pages/contact/Contact'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
-import Customer from './pages/customer/Customer'
 import Admin from './pages/admin/Admin'
 import Missing from './pages/missing/Missing'
 import MainContainer from './components/mainContainter/MainContainer';
 import RequireAuth from './components/RequireAuth';
+import Unauthorised from './pages/unauthorised/Unauthorised';
 
 import Auth from '../src/utils/auth';
 
@@ -22,26 +21,27 @@ function App() {
       <Routes>
         <Route exact path='/' element={<MainContainer />}>
           {/* Public routes */}
+          <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/unauthorised" element={<Unauthorised />} />
+
 
           {/* Protected routes */}
-          <Route element={<RequireAuth />}>
-            {/* RequireAuth Outlet */}
-            <Route path="customer" element={<Customer />} />
+          <Route element={<RequireAuth userType='Customer' />}>
+            <Route path="/gallery" element={<Gallery />} />
+          </Route>
+          <Route element={<RequireAuth userType='Admin' />}>
             <Route path="admin" element={<Admin />} />
-            <Route path="/logout" element={<Home />} />
           </Route>
 
           {/* Undefined paths */}
           <Route path="*" element={<Missing />} />
+          <Route path="/logout" element={<Home />} />
         </Route>
 
 
-        <Route path="/gallery" element={<Gallery />}>
-        </Route>
 
       </Routes>
       {/* <MocartContainer /> */}

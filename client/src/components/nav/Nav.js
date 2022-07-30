@@ -2,8 +2,16 @@ import React from 'react';
 import './nav.css';
 import logo from '../../assets/img/sflogo.jpg';
 import Auth from '../../utils/auth';
+import useUserContext from '../../hooks/useUserContext';
 
 function Nav() {
+
+
+  let loggedInUserType
+  if (Auth.loggedIn()) {
+    loggedInUserType = Auth.getProfile().data.userType;
+  }
+
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -18,9 +26,22 @@ function Nav() {
           <li>
             <a className="nav-text" href="/" >Home</a>
           </li>
-          <li>
-            <a className="nav-text" href="gallery" >Gallery</a>
-          </li>
+          {loggedInUserType === 'Admin' && Auth.loggedIn() ? (
+            <>
+              <li>
+                <a className="nav-text" href="orders" >Orders</a>
+              </li>
+              <li>
+                <a className="nav-text" href="pricelist" >Price List</a>
+              </li>
+            </>
+          ) : loggedInUserType === 'Customer' && Auth.loggedIn() ? (
+            <li>
+              <a className="nav-text" href="gallery" >Gallery</a>
+            </li>
+          ) :
+            <></>
+          }
           <li>
             <a className="nav-text" href="contact" >Contact</a>
           </li>
@@ -30,14 +51,14 @@ function Nav() {
               <a className="nav-text" href="logout" onClick={logout}>Logout</a>
             </li>
           ) : (
-            <React.Fragment>
+            <>
               <li>
                 <a className="nav-text" href="login" >Login</a>
               </li>
               <li>
                 <a className="nav-text" href="signup" >Sign Up</a>
               </li>
-            </ React.Fragment>
+            </>
           )}
 
         </ul>

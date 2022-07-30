@@ -33,7 +33,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await Axios.post(`${URI}/api/users/login`, {
-        username: loginFormState.username,
+        email: loginFormState.email,
         password: loginFormState.password
       });
       // Login the user and navigate to the from location

@@ -67,8 +67,7 @@ module.exports = {
   // User Login
   async loginUser(req, res) {
     try {
-      const user = await User.findOne({ where: { email: req.body.email } });
-
+      const user = await User.findOne({ email: req.body.email } );
       if (!user) {
         res
           .status(400)

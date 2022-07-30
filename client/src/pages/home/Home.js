@@ -10,6 +10,7 @@ function Home() {
   return (
     <>
       <Nav />
+      Home
     </>
   )
 };
