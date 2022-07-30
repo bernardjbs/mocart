@@ -1,11 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
-const User = require('../models/User');
-const Order = require('../models/Order');
 
 module.exports = {
   async payment(req, res) {
-    const cartItems = localStorage.getItem('cartItems')
-    console.log(cartItems);
     try {
       stripe.charges.create(
         {

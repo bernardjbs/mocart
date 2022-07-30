@@ -7,7 +7,7 @@ const printSchema = new Schema(
       required: true,
     },
     filename: {
-      type: String, 
+      type: String,
       required: true
     },
     quantity: {
@@ -23,23 +23,29 @@ const printSchema = new Schema(
 
 
 // Order Schema binding prints schema used to create model
+const subOrderSchema = new Schema(
+  {
+    imageInfo: [printSchema],
+  },
+);
+
 const orderSchema = new Schema(
   {
-    prints: [printSchema],
-    note: {
-      type: String, 
-    },
+    prints: [subOrderSchema],
     //status: Open, Complete, Delivered, In Progress
     status: {
       type: String,
       required: true
     },
+    note: {
+      type: String,
+    },
   },
   {
     timestamps: true,
-  },
-);
+  }
 
+)
 // Initialise Order model
 const Order = model('order', orderSchema);
 

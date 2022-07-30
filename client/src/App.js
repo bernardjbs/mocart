@@ -6,14 +6,12 @@ import Gallery from './pages/gallery/Gallery'
 import Contact from './pages/contact/Contact'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
-import Admin from './pages/admin/Admin'
+import Orders from './pages/orders/Orders'
+import PriceList from './pages/pricelist/PriceList'
 import Missing from './pages/missing/Missing'
 import MainContainer from './components/mainContainter/MainContainer';
 import RequireAuth from './components/RequireAuth';
 import Unauthorised from './pages/unauthorised/Unauthorised';
-
-import Auth from '../src/utils/auth';
-
 
 function App() {
   return (
@@ -33,7 +31,8 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
           </Route>
           <Route element={<RequireAuth userType='Admin' />}>
-            <Route path="admin" element={<Admin />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="pricelist" element={<PriceList />} />
           </Route>
 
           {/* Undefined paths */}

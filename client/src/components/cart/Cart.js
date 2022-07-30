@@ -3,10 +3,19 @@ import { useNavigate } from "react-router-dom";
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { Button, TextareaAutosize } from '@mui/material';
+import Auth from '../../utils/auth';
 
 import CartItem from '../../components/cartItem/CartItem';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
+
+let loggedInUser;
+
+if (Auth.loggedIn()) {
+  loggedInUser = Auth.getProfile().data;  
+}
+
+console.log(loggedInUser)
 
 function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handlePrice, stripeKey }) {
   const [stripeToken, setStripeToken] = useState(null);
@@ -21,23 +30,34 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
     setNote(value);
   }
   const saveOrder = async () => {
-    console.log(cartItems)
-    cartItems.forEach( async item => {
-      try {
-        const response = await axios.post(`${URI}/api/orders/neworder`, {
-          prints: [{
-            id: item._id, 
-            filename: item.filename, 
-            quantity: item.amount, 
-            size: item.size,
-          }],
-          note: note,
-          status: 'Open'
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    }); 
+    let subOrder = []
+    cartItems.forEach(async item => {
+      subOrder.push({
+        imageInfo: [{
+          id: item._id,
+          filename: item.filename,
+          quantity: item.amount,
+          size: item.size,
+        }],
+      })
+    });
+    const order = {
+      prints: subOrder,
+      status: 'Open',
+      note: note,
+    };
+    console.log(subOrder);
+    console.log(order);
+
+    try {
+      await axios.post(`${URI}/api/orders/neworder`, {
+        ...order,
+      });
+      
+    } catch (err) {
+      console.error(err);
+    }
+
   };
 
   let navigate = useNavigate();
@@ -48,7 +68,7 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
   useEffect(() => {
     const paymentRequest = async () => {
       try {
-        const res = await axios.post(`${URI}/api/checkout/payment`, {
+        await axios.post(`${URI}/api/checkout/payment`, {
           stripeTokenId: stripeToken.id,
           amount: totalAmount * 100, // Multiply by 100 - Stripe use cents
         });

@@ -1,14 +1,14 @@
 import React from 'react';
 import Nav from '../../components/nav/Nav'
 
-function Admnin() {
+function Orders() {
 
   return (
     <>
       <Nav />
-      Admin
+      Orders
     </>
   )
 };
 
-export default Admnin;
+export default Orders;
