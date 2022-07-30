@@ -29,7 +29,7 @@ function Signup() {
         password: signupFormState.password,
         firstName: signupFormState.firstName,
         lastName: signupFormState.lastName,
-        userType: 'User',
+        userType: 'Customer',
         shippingDetails: [
           {
             street: signupFormState.street,

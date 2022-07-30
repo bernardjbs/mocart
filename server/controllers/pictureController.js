@@ -13,6 +13,16 @@ module.exports = {
     };
   },
 
+  async getPictureByUser(req, res) {
+    try {
+      console.log(req.params)
+      const pictures = await Picture.find({ userId: req.params.userId } )
+      res.status(200).json(pictures);
+    } catch (err) {
+      res.status(500).json({ message: 'Your request could not be performed, please try again', body: err });
+    };
+  },
+
   uploadPictures (req, res, next) {
     const files = req.files;
     let filepath = '';

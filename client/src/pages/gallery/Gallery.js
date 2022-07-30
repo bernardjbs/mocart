@@ -117,8 +117,7 @@ function Gallery() {
   // Get pictures data
   const getPictureFiles = useCallback(async () => {
     try {
-      const { data } = await axios.get(`${URI}/api/picture/pictures`);
-      // console.log(data)
+      const { data } = await axios.get(`${URI}/api/picture/pictures/${loggedInUser._id}`);
       setGetPicturesData(data);
       return data;
     } catch (error) {
