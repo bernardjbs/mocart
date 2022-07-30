@@ -12,10 +12,8 @@ const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_U
 let loggedInUser;
 
 if (Auth.loggedIn()) {
-  loggedInUser = Auth.getProfile().data;  
+  loggedInUser = Auth.getProfile().data;
 }
-
-console.log(loggedInUser)
 
 function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handlePrice, stripeKey }) {
   const [stripeToken, setStripeToken] = useState(null);
@@ -32,17 +30,16 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
   const saveOrder = async () => {
     let subOrder = []
     cartItems.forEach(async item => {
-      subOrder.push({
-        imageInfo: [{
+      subOrder.push([{
           id: item._id,
           filename: item.filename,
           quantity: item.amount,
           size: item.size,
         }],
-      })
+      )
     });
     const order = {
-      prints: subOrder,
+      imageInfo: subOrder,
       status: 'Open',
       note: note,
     };
@@ -53,7 +50,13 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
       await axios.post(`${URI}/api/orders/neworder`, {
         ...order,
       });
-      
+
+      const user = await (await axios.put(`${URI}/api/users/${loggedInUser._id}`)).data;
+      console.log(user.orders);
+      console.log(loggedInUser._id)
+      const newOrders = [...user.orders, order]
+      const response = await axios.put(`${URI}/api/users/${loggedInUser._id}`, { orders: newOrders });
+      console.log(response);
     } catch (err) {
       console.error(err);
     }

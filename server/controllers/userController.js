@@ -43,6 +43,7 @@ module.exports = {
   // Todo: Check Logged in user if not admin ==> cannot update userType
   async updateUser(req, res) {
     try {
+      console.log(req.body)
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $set: req.body },

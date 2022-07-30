@@ -31,7 +31,7 @@ const subOrderSchema = new Schema(
 
 const orderSchema = new Schema(
   {
-    prints: [subOrderSchema],
+    imageInfo: [subOrderSchema],
     //status: Open, Complete, Delivered, In Progress
     status: {
       type: String,
