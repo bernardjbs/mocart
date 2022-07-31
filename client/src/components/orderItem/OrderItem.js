@@ -4,10 +4,14 @@ const saveOrder = () => {
 
 }
 
-const downloadImages = () => {
 
-}
 function OrderItem({ orders }) {
+  
+  const downloadImages = () => {
+    console.log("hello")
+    // console.log(orders)
+  }
+
   console.log(orders)
   return (
     <>
@@ -38,9 +42,8 @@ function OrderItem({ orders }) {
               </button>
             </section>
           </section>
-
           <div className='download'>
-            <button className='btn btn-primary' onClick={downloadImages}>
+            <button onClick={downloadImages} className='btn btn-primary'>
               Download Order
             </button>
           </div>

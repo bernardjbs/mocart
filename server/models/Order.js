@@ -21,25 +21,15 @@ const printSchema = new Schema(
   }
 )
 
-
-// Order Schema binding prints schema used to create model
-const subOrderSchema = new Schema(
-  {
-    imageInfo: [printSchema],
-  },
-);
-
 const orderSchema = new Schema(
   {
     customerId: {
       type: String,
-      required: true,
     },
-    imageInfo: [subOrderSchema],
+    imageInfo: [printSchema],
     //status: Open, Complete, Delivered, In Progress
     status: {
       type: String,
-      required: true
     },
     note: {
       type: String,

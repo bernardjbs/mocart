@@ -18,7 +18,6 @@ if (Auth.loggedIn()) {
 function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handlePrice, stripeKey }) {
   const [stripeToken, setStripeToken] = useState(null);
   const [note, setNote] = useState('');
-
   const onToken = (token) => {
     setStripeToken(token);
   }
@@ -31,28 +30,30 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
     console.log(cartItems)
     let subOrder = []
     cartItems.forEach(async item => {
-      subOrder.push([{
+      subOrder.push({
         id: item._id,
         filename: item.filename,
         quantity: item.amount,
         size: item.size,
-      }],
+      },
       )
     });
-    // console.log(subOrder)
+    
     const order = {
       customerId: Auth.getProfile().data._id,
       imageInfo: subOrder,
       status: 'Open',
       note: note,
     };
-
+    
+    console.log("this is the subOrder");
+    console.log(order)
     try {
-      await axios.post(`${URI}/api/orders/neworder`, {
-        ...order,
-      });
+      await axios.post(`${URI}/api/orders/neworder`, 
+        order,
+      );
 
-      console.log(order)
+      // console.log(order)
 
       const user = await (await axios.put(`${URI}/api/users/${loggedInUser._id}`)).data;
       const newOrders = [...user.orders, order]
