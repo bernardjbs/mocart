@@ -28,35 +28,35 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
     setNote(value);
   }
   const saveOrder = async () => {
+    console.log(cartItems)
     let subOrder = []
     cartItems.forEach(async item => {
       subOrder.push([{
-          id: item._id,
-          filename: item.filename,
-          quantity: item.amount,
-          size: item.size,
-        }],
+        id: item._id,
+        filename: item.filename,
+        quantity: item.amount,
+        size: item.size,
+      }],
       )
     });
+    // console.log(subOrder)
     const order = {
+      customerId: Auth.getProfile().data._id,
       imageInfo: subOrder,
       status: 'Open',
       note: note,
     };
-    console.log(subOrder);
-    console.log(order);
 
     try {
       await axios.post(`${URI}/api/orders/neworder`, {
         ...order,
       });
 
+      console.log(order)
+
       const user = await (await axios.put(`${URI}/api/users/${loggedInUser._id}`)).data;
-      console.log(user.orders);
-      console.log(loggedInUser._id)
       const newOrders = [...user.orders, order]
       const response = await axios.put(`${URI}/api/users/${loggedInUser._id}`, { orders: newOrders });
-      console.log(response);
     } catch (err) {
       console.error(err);
     }

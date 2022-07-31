@@ -15,6 +15,8 @@ module.exports = {
   // Create a order
   async createOrder(req, res) {
     try {
+      // console.log(req.body)
+      console.log("passing the controller")
       const newOrder = await Order.create(req.body);
       res.status(200).json({
         message: "Order successfully created", order: newOrder

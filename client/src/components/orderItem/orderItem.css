@@ -1,0 +1,18 @@
+.btn {
+padding: 0.5rem
+}
+
+.status-container, .status-card {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.download {
+  display: flex;
+  justify-content: center;
+}
+
+select {
+  border-radius: 0.5rem;
+}

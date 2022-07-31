@@ -15,7 +15,7 @@ module.exports = {
 
   async getPictureByUser(req, res) {
     try {
-      console.log(req.params)
+      // console.log(req.params)
       const pictures = await Picture.find({ userId: req.params.userId } )
       res.status(200).json(pictures);
     } catch (err) {
@@ -34,7 +34,7 @@ module.exports = {
       const img_base64 = img.toString('base64')
       let userId = req.body.userId
 
-      console.log(userId[0])
+      // console.log(userId[0])
       const picture = new Picture({
         filename: files[index].originalname,
         contentType: files[index].mimetype,

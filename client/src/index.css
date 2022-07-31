@@ -82,7 +82,22 @@ a:hover {
   display: flex;
   flex-direction: row;
 }
-/* .btn {
+
+.item-card{
+  margin: 1rem;
+  padding: 2rem;
+  background: var(--color-bg-variant);
+  color: white;
+  border-radius: 1rem;
+}
+
+.sub-card {
+  background: var(--color-primary-variant);
+  padding: 0.5em;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+.btn {
   width: max-content;
   display: inline-block;
   color: var(--color-primary);
@@ -102,7 +117,7 @@ a:hover {
 .btn-primary {
   background: var(--color-primary);
   color: var(--color-bg);
-} */
+}
 
 img {
   display: block;
