@@ -5,7 +5,6 @@ function Item({ item, handleAddToCart }) {
 
   return (
     <>
-      <img src='' alt='' />
       <div>
         <img className='picture-image' src={`data:image;base64,${item.imageBase64}`} alt={item.filename} />
         <p>File: {item.filename}</p>

@@ -48,24 +48,30 @@ function Login() {
     <>
       <Nav />
       <section className='login-container'>
-        <section className="login">
-          <form onSubmit={handleFormSubmit}>
-            <input
-              className="form-input"
-              placeholder="Your email"
-              name="email"
-              type="email"
-              value={loginFormState.email || ''}
-              onChange={handleChange}
-            />
-            <input
-              className="form-input"
-              placeholder="******"
-              name="password"
-              type="password"
-              value={loginFormState.password || ''}
-              onChange={handleChange}
-            />
+        <form onSubmit={handleFormSubmit}>
+          <section className='login'>
+          <section className='input-container'>
+              <div><p>Email</p></div>
+              <input
+                className="form-input"
+                placeholder="Your email"
+                name="email"
+                type="email"
+                value={loginFormState.email || ''}
+                onChange={handleChange}
+              />
+            </section>
+            <section className='input-container'>
+              <p>Password</p>
+              <input
+                className="form-input"
+                placeholder="******"
+                name="password"
+                type="password"
+                value={loginFormState.password || ''}
+                onChange={handleChange}
+              />
+            </section>
             <section className='button-section'>
               <button
                 className="btn btn-block btn-primary"
@@ -74,8 +80,9 @@ function Login() {
               >Login
               </button>
             </section>
+          </section>
+            
           </form>
-        </section>
       </section>
 
     </>

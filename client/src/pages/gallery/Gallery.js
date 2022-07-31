@@ -34,7 +34,7 @@ function Gallery() {
       const isItemInCart = prev.find(item => item._id === selectedItem._id);
 
       if (isItemInCart) {
-        const items = prev.map(item => 
+        const items = prev.map(item =>
           item._id === selectedItem._id
             ? { ...item, selectedSize: selectedItem.size }
             : item
@@ -50,7 +50,7 @@ function Gallery() {
       const isItemInCart = prev.find(item => item._id === selectedItem._id);
 
       if (isItemInCart) {
-        const items = prev.map(item => 
+        const items = prev.map(item =>
           item._id === selectedItem._id
             ? { ...item, price: selectedItem.price }
             : item
@@ -66,16 +66,16 @@ function Gallery() {
       const isItemInCart = prev.find(item => item._id === clickedItem._id);
 
       if (isItemInCart) {
-        const items = prev.map(item => 
+        const items = prev.map(item =>
           item._id === clickedItem._id
             ? { ...item, amount: item.amount + 1, id: clickedItem._id }
             : item
         );
         return items;
       }
-      
+
       // First time the item is added, initialize the amount and the size
-      return [...prev, {...clickedItem, amount: 1, id: clickedItem._id}];
+      return [...prev, { ...clickedItem, amount: 1, id: clickedItem._id }];
     });
   };
 
@@ -151,45 +151,49 @@ function Gallery() {
   return (
     <>
       <Nav />
-      <div className="row">
-        <div className="col-6">
-          <div className="form-group">
-            <label>Select Picture Files</label>
-            <input type="file" onChange={(e) => handlePictureFileChange(e)} className="form-control" multiple />
+      <section className='select-files-container'>
+        <div className="form-group">
+          <h2>Select Picture Files</h2>
+        </div>
+        <section className='upload-section'>
+          <input type="file" onChange={(e) => handlePictureFileChange(e)} className="form-control" multiple />
+          <div className="col-10">
+            <button type="button" onClick={() => handleUploadPictures()} className="btn btn-danger">Upload</button>
           </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-10">
-          <button type="button" onClick={() => handleUploadPictures()} className="btn btn-danger">Upload</button>
-        </div>
-      </div>
-      <section className="pictures-section">
-        <h1 className="test">My Pictures</h1>
+        </section>
       </section>
 
-      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart
-          cartItems={cartItems}
-          addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
-          handlePrice={handlePrice}
-          stripeKey={STRIPE_KEY}
-          handleSelectedSize={handleSelectedSize}
-        />
-      </Drawer>
-      <Button onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-          <AddShoppingCart />
-        </Badge>
-      </Button>
-      <Grid container spacing={3}>
-        {getPicturesData?.map(item => (
-          <Grid item key={item._id} xs={12} sm={4}>
-            <Item item={item} handleAddToCart={handleAddToCart} />
+      <section className="pictures-section">
+        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+          <Cart
+            cartItems={cartItems}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+            handlePrice={handlePrice}
+            stripeKey={STRIPE_KEY}
+            handleSelectedSize={handleSelectedSize}
+          />
+        </Drawer>
+
+        <section className='gallery-container'>
+          <section className='badge-container'>
+            <Button onClick={() => setCartOpen(true)}>
+              <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                <AddShoppingCart />
+              </Badge>
+            </Button>
+          </section>
+          <h1>My Pictures</h1>
+
+          <Grid container spacing={3}>
+            {getPicturesData?.map(item => (
+              <Grid item key={item._id} xs={12} sm={4}>
+                <Item item={item} handleAddToCart={handleAddToCart} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </section>
+      </section>
     </>
 
   )

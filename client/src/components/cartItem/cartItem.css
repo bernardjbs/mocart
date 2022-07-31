@@ -1,4 +1,4 @@
-img {
+.cart-item-image {
   max-width: 150px;
   object-fit: cover;
   margin-left: 40px;

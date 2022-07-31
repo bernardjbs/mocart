@@ -10,7 +10,7 @@ function CartItem({ item, addToCart, removeFromCart, handlePrice, handleSelected
     <>
       <div>
         <p>{item.filename}</p>
-        <img src={`data:image;base64,${item.imageBase64}`} alt={item.filename} />
+        <img className='cart-item-image' src={`data:image;base64,${item.imageBase64}`} alt={item.filename} />
         {/* <img src={item.imageBase64} alt={item.title} /> */}
         <div className='picture-size-order'>
           <Button

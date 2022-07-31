@@ -4,8 +4,27 @@
 }
 .picture-image {
   height: 20rem;
-  width: auto
 }
 .quantity {
   width: 8rem
+}
+.upload-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.select-files-container {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.badge-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.gallery-container {
+  padding: 0 4rem;
 }

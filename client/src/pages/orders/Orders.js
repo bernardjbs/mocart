@@ -75,7 +75,7 @@ function Orders() {
           <Grid item key={customer.id} xs={12} sm={4}>
             <p>Customer: {customer.name}</p>
             <p>Orders: {customer.orders.length}</p>
-            <button onClick={() => setOrderOpen(true)}>View Order</button>
+            <button className='btn btn-primary' onClick={() => setOrderOpen(true)}>View Order</button>
           </Grid>
         ))}
 
