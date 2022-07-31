@@ -22,6 +22,7 @@ function Nav() {
       <div>
         <img className="logo-image" src={logo} alt="sin fat logo" />
       </div>
+      <h1>Pictura Online Printing</h1>
       <nav>
         <ul>
           <li>

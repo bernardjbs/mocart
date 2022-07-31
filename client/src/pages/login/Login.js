@@ -47,33 +47,37 @@ function Login() {
   return (
     <>
       <Nav />
-      <div className="login-form">
-        <form onSubmit={handleFormSubmit}>
-          <input
-            className="form-input"
-            placeholder="Your email"
-            name="email"
-            type="email"
-            value={loginFormState.email || ''}
-            onChange={handleChange}
-          />
-          <input
-            className="form-input"
-            placeholder="******"
-            name="password"
-            type="password"
-            value={loginFormState.password || ''}
-            onChange={handleChange}
-          />
-          <button
-            className="btn btn-block btn-primary"
-            style={{ cursor: 'pointer' }}
-            type="submit"
-          >
-            Login
-          </button>
-        </form>
-      </div>
+      <section className='login-container'>
+        <section className="login">
+          <form onSubmit={handleFormSubmit}>
+            <input
+              className="form-input"
+              placeholder="Your email"
+              name="email"
+              type="email"
+              value={loginFormState.email || ''}
+              onChange={handleChange}
+            />
+            <input
+              className="form-input"
+              placeholder="******"
+              name="password"
+              type="password"
+              value={loginFormState.password || ''}
+              onChange={handleChange}
+            />
+            <section className='button-section'>
+              <button
+                className="btn btn-block btn-primary"
+                style={{ cursor: 'pointer' }}
+                type="submit"
+              >Login
+              </button>
+            </section>
+          </form>
+        </section>
+      </section>
+
     </>
 
   );

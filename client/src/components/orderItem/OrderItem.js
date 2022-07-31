@@ -1,11 +1,26 @@
 import React from 'react';
 import './orderItem.css';
-const saveOrder = () => {
-
-}
-
 
 function OrderItem({ orders }) {
+
+  const saveOrder = () => {
+    
+  //   let file = convertBase64ToFile(base64String, fileName);
+  //   saveAs(file, fileName);
+  // }
+
+  // const convertBase64ToFile = (base64String, fileName) => {
+  //   let arr = base64String.split(',');
+  //   let mime = arr[0].match(/:(.*?);/)[1];
+  //   let bstr = atob(arr[1]);
+  //   let n = bstr.length;
+  //   let uint8Array = new Uint8Array(n);
+  //   while (n--) {
+  //      uint8Array[n] = bstr.charCodeAt(n);
+  //   }
+  //   let file = new File([uint8Array], fileName, { type: mime });
+  //   return file;
+  }
   
   const downloadImages = () => {
     console.log("hello")
@@ -19,10 +34,11 @@ function OrderItem({ orders }) {
         <section className='item-card'>
           {(order.imageInfo).map(image => (
             <>
+              
               <section className='sub-card'>
-                <p>Filename: {image[0].filename}</p>
-                <p>Quantity: {image[0].quantity}</p>
-                <p>Size: {image[0].size}</p>
+                <p>Filename: {image.filename}</p>
+                <p>Quantity: {image.quantity}</p>
+                <p>Size: {image.size}</p>
               </section>
             </>
           ))}
