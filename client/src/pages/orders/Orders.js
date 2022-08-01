@@ -14,6 +14,7 @@ function Orders() {
   const getUserOrders = async () => {
     try {
       const { data } = await axios.get(`${URI}/api/users`);
+      console.log(Array.isArray(data))
       let openOrders = [];
       let filteredOrders = [];
       let customerOrder = {};
