@@ -33,9 +33,6 @@ function Nav() {
               <li>
                 <a className="nav-text" href="orders" >Orders</a>
               </li>
-              <li>
-                <a className="nav-text" href="pricelist" >Price List</a>
-              </li>
             </>
           ) : loggedInUserType === 'Customer' && Auth.loggedIn() ? (
             <li>
@@ -44,9 +41,6 @@ function Nav() {
           ) :
             <></>
           }
-          <li>
-            <a className="nav-text" href="contact" >Contact</a>
-          </li>
 
           {Auth.loggedIn() ? (
             <li>

@@ -20,7 +20,6 @@ function App() {
         <Route exact path='/' element={<MainContainer />}>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/unauthorised" element={<Unauthorised />} />
@@ -32,7 +31,6 @@ function App() {
           </Route>
           <Route element={<RequireAuth userType='Admin' />}>
             <Route path="orders" element={<Orders />} />
-            <Route path="pricelist" element={<PriceList />} />
           </Route>
 
           {/* Undefined paths */}
