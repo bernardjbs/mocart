@@ -18,26 +18,29 @@ function Orders() {
       let openOrders = [];
       let filteredOrders = [];
       let customerOrder = {};
-      data.map(user => {
-        if (user.orders.length > 0) {
-          const orders = user.orders;
-          orders.map(order => {
-            if (order.status === 'Open') {
-              openOrders.push(user);
-            }
-          });
-        };
-      });
-      const uniqueOrders = [...new Set(openOrders)]
-      uniqueOrders.map(order => {
-        customerOrder = {
-          id: order._id,
-          name: `${order.firstName} ${order.lastName}`,
-          orders: order.orders,
-        }
-        filteredOrders.push(customerOrder);
-      });
-      return [filteredOrders];
+      if (!Array.isArray(data)) {
+        data.map(user => {
+          if (user.orders.length > 0) {
+            const orders = user.orders;
+            orders.map(order => {
+              if (order.status === 'Open') {
+                openOrders.push(user);
+              }
+            });
+          };
+        });
+        const uniqueOrders = [...new Set(openOrders)]
+        uniqueOrders.map(order => {
+          customerOrder = {
+            id: order._id,
+            name: `${order.firstName} ${order.lastName}`,
+            orders: order.orders,
+          }
+          filteredOrders.push(customerOrder);
+        });
+        return [filteredOrders];
+      }
+
     } catch (error) {
       throw error;
     }
