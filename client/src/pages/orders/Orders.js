@@ -18,7 +18,7 @@ function Orders() {
       let openOrders = [];
       let filteredOrders = [];
       let customerOrder = {};
-      if (!Array.isArray(data)) {
+      if (Array.isArray(data)) {
         data.map(user => {
           if (user.orders.length > 0) {
             const orders = user.orders;
