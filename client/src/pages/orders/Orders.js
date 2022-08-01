@@ -39,6 +39,8 @@ function Orders() {
           filteredOrders.push(customerOrder);
         });
         return [filteredOrders];
+      } else {
+        return null;
       }
 
     } catch (error) {
