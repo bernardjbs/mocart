@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
     loggedInUser = Auth.getProfile()
   } else {
     loggedInUser = ''
-  }
+  };
   // Provider components expect a value prop to be passed
   return (
     <UserContext.Provider value={loggedInUser.data}>

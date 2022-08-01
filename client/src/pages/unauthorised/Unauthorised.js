@@ -1,15 +1,13 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-import Nav from '../../components/nav/Nav'
+import Nav from '../../components/nav/Nav';
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
 const Unauthorised = () => {
   const navigate = useNavigate();
-
   const goBack = () => navigate(-1);
-
   return (
     <>
       <Nav />
@@ -20,10 +18,9 @@ const Unauthorised = () => {
         <div className="flexGrow">
           <button onClick={goBack}>Go Back</button>
         </div>
-
       </section>
     </>
-  )
-}
+  );
+};
 
 export default Unauthorised

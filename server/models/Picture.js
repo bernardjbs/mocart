@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 // Image uploads
-
 const pictureSchema = new Schema({
   filename: {
     type: String,

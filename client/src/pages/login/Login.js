@@ -8,9 +8,6 @@ import Nav from '../../components/nav/Nav'
 
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
-// Test on local build 
-// const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : http://www.localhost:5000;
-
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,7 +39,7 @@ function Login() {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <>
@@ -88,6 +85,6 @@ function Login() {
     </>
 
   );
-}
+};
 
 export default Login;

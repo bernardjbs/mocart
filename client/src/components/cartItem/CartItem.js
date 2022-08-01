@@ -41,7 +41,6 @@ function CartItem({ item, addToCart, removeFromCart, handlePrice, handleSelected
           />
         </div>
       </section>
-      <hr />
     </>
   );
 };

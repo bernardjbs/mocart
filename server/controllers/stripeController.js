@@ -18,7 +18,6 @@ module.exports = {
         }
       );
 
-
     } catch (error) {
       res.status(500).json({ message: 'Your request could not be performed, please try again', body: error })
     };

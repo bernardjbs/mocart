@@ -2,10 +2,8 @@ import React from 'react';
 import './nav.css';
 import logo from '../../assets/img/sflogo.jpg';
 import Auth from '../../utils/auth';
-import useUserContext from '../../hooks/useUserContext';
 
 function Nav() {
-
 
   let loggedInUserType
   if (Auth.loggedIn()) {
@@ -41,7 +39,6 @@ function Nav() {
           ) :
             <></>
           }
-
           {Auth.loggedIn() ? (
             <li>
               <a className="nav-text" href="logout" onClick={logout}>Logout</a>
@@ -56,7 +53,6 @@ function Nav() {
               </li>
             </>
           )}
-
         </ul>
       </nav>
     </section>

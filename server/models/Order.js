@@ -18,8 +18,8 @@ const printSchema = new Schema(
       type: String,
       required: true,
     },
-  }
-)
+  },
+);
 
 const orderSchema = new Schema(
   {
@@ -37,9 +37,9 @@ const orderSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
+);
 
-)
 // Initialise Order model
 const Order = model('order', orderSchema);
 

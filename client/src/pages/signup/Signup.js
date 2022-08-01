@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from 'axios';
 import Auth from '../../utils/auth';
-import Nav from '../../components/nav/Nav'
+import Nav from '../../components/nav/Nav';
 import './signup.css';
 
 // Todo: Perform check if password is correct by matching another entry, also check if password is valid by regex - maybe in user model schema validation? 
@@ -38,15 +38,15 @@ function Signup() {
             state: signupFormState.state,
             country: signupFormState.country,
           }
-        ]
+        ],
       });
 
       // signup the user and redirect to homepage
       Auth.login(response.data.token);
     } catch (err) {
       console.error(err);
-    }
-  }
+    };
+  };
 
   return (
     <>
@@ -146,11 +146,7 @@ function Signup() {
           </section>
         </form>
       </section>
-
-
-
     </>
-
   );
 };
 

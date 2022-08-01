@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
-import { button, TextareaAutosize } from '@mui/material';
+import { TextareaAutosize } from '@mui/material';
 import Auth from '../../utils/auth';
-import './cart.css'
+import './cart.css';
 
 import CartItem from '../../components/cartItem/CartItem';
 
@@ -28,7 +28,6 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
     setNote(value);
   }
   const saveOrder = async () => {
-    console.log(cartItems)
     let subOrder = []
     cartItems.forEach(async item => {
       subOrder.push({
@@ -37,7 +36,7 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
         quantity: item.amount,
         size: item.size,
       },
-      )
+      );
     });
 
     const order = {
@@ -47,8 +46,6 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
       note: note,
     };
 
-    console.log("this is the subOrder");
-    console.log(order)
     try {
       await axios.post(`${URI}/api/orders/neworder`,
         order,
@@ -58,8 +55,7 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
       const response = await axios.put(`${URI}/api/users/${loggedInUser._id}`, { orders: newOrders });
     } catch (err) {
       console.error(err);
-    }
-
+    };
   };
 
   let navigate = useNavigate();
@@ -99,7 +95,6 @@ function Cart({ cartItems, addToCart, removeFromCart, handleSelectedSize, handle
             handleSelectedSize={handleSelectedSize}
           />
         ))}
-        {/* {console.log(cartItems)} */}
         <section className='cart-info'>
           <h2>Total: ${totalAmount}</h2>
           <TextareaAutosize

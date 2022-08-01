@@ -4,7 +4,6 @@ import axios from 'axios';
 const URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
 function ItemOrder({ item, handlePrice, handleSelectedSize }) {
-
   const [sizes, setSizes] = useState([]);
   const [size, setSize] = useState('10x15');
   const [price, setPrice] = useState(2.5);
@@ -23,7 +22,7 @@ function ItemOrder({ item, handlePrice, handleSelectedSize }) {
   }
   useEffect(() => {
     // Fetch sizes
-    getSizes()
+    getSizes();
     // Trigger the fetch
     getSizes();
   }, []);
@@ -37,21 +36,21 @@ function ItemOrder({ item, handlePrice, handleSelectedSize }) {
     } else {
       setPrice(item.price);
       setSize(item.size);
-    }
+    };
     handlePrice(item);
     handleSelectedSize(item);
-  }, [])
+  }, []);
 
   const itemSubTotal = () => {
     if (price === undefined) {
       setPrice(item.price);
     }
-    const calcPrice = item.price * item.amount
+    const calcPrice = item.price * item.amount;
     if (calcPrice) {
       return calcPrice;
     }
     else return 0;
-  }
+  };
 
   const selectPrice = (e) => {
     const idx = e.target.selectedIndex;
@@ -64,7 +63,7 @@ function ItemOrder({ item, handlePrice, handleSelectedSize }) {
     handlePrice(item);
     setSize(item.size);
     handleSelectedSize(item);
-  }
+  };
 
   return (
     <>
@@ -85,7 +84,6 @@ function ItemOrder({ item, handlePrice, handleSelectedSize }) {
       </select>
       ${itemSubTotal().toFixed(2)}
     </>
-
   );
 };
 

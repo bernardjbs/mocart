@@ -15,7 +15,6 @@ module.exports = {
 
   async getPictureByUser(req, res) {
     try {
-      // console.log(req.params)
       const pictures = await Picture.find({ userId: req.params.userId } )
       res.status(200).json(pictures);
     } catch (err) {
@@ -26,15 +25,13 @@ module.exports = {
   uploadPictures (req, res, next) {
     const files = req.files;
     let filepath = '';
-    // console.log(req.body.userId) 
 
     let result = files.map(async (file, index) => {
-      filepath = file.path.replace(/\\/g, '/') // convert the backslash to forward slash
-      let img = fs.readFileSync(file.path)
-      const img_base64 = img.toString('base64')
-      let userId = req.body.userId
+      filepath = file.path.replace(/\\/g, '/'); // convert the backslash to forward slash
+      let img = fs.readFileSync(file.path);
+      const img_base64 = img.toString('base64');
+      let userId = req.body.userId;
 
-      // console.log(userId[0])
       const picture = new Picture({
         filename: files[index].originalname,
         contentType: files[index].mimetype,
@@ -44,15 +41,15 @@ module.exports = {
       });
 
       return picture
-      .save()
-      .then(() => {
-          return { msg : `${files[index].originalname} Uploaded Successfully...!`}
-      })
-      .catch(error =>{
-          if(error){
-              return Promise.reject({ error : error.message || `Cannot Upload ${files[index].originalname} Something Missing!`})
-          }
-      })
+        .save()
+        .then(() => {
+          return { msg: `${files[index].originalname} Uploaded Successfully...!` }
+        })
+        .catch(error => {
+          if (error) {
+            return Promise.reject({ error: error.message || `Cannot Upload ${files[index].originalname} Something Missing!` })
+          };
+        });
     });
     Promise.all(result)
       .then(msg => {

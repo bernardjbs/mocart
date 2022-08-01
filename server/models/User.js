@@ -6,8 +6,6 @@ let PicSchema = new Schema({
   filename: String
 });
 
-
-
 // Schema to create User model
 const userSchema = new Schema(
   {
@@ -66,7 +64,7 @@ const userSchema = new Schema(
       {
         pictureId: {
           type: String
-        }
+        },
       },
     ], 
   },
@@ -77,7 +75,7 @@ const userSchema = new Schema(
       virtuals: true,
     },
     id: false,
-  }
+  },
 );
 
 // Create a virtual property `fullName` that gets and sets the user's full name

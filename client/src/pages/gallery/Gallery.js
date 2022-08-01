@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Nav from '../../components/nav/Nav'
-
 import './gallery.css'
 import Auth from '../../utils/auth';
 import axios from 'axios';
 
 // Import components
+import Nav from '../../components/nav/Nav';
 import Item from '../../components/item/Item';
 import Cart from '../../components/cart/Cart';
 
@@ -18,17 +17,15 @@ const STRIPE_KEY = process.env.REACT_APP_STRIPE;
 let loggedInUser;
 if (Auth.loggedIn()) {
   loggedInUser = Auth.getProfile().data;
-}
+};
 
 function Gallery() {
-
   const getTotalItems = (items) => {
     const reducedAmount = items.reduce((acc, item) => acc + item.amount, 0);
     return reducedAmount
-  }
+  };
 
   const handleSelectedSize = (selectedItem) => {
-    console.log("i am here - handleSelectedSize() Gallery.js")
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item._id === selectedItem._id);
@@ -40,11 +37,10 @@ function Gallery() {
             : item
         );
         return items;
-      }
+      };
     });
   };
   const handlePrice = (selectedItem) => {
-    // console.log("i am here")
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item._id === selectedItem._id);
@@ -56,7 +52,7 @@ function Gallery() {
             : item
         );
         return items;
-      }
+      };
     });
   };
 
@@ -72,7 +68,7 @@ function Gallery() {
             : item
         );
         return items;
-      }
+      };
 
       // First time the item is added, initialize the amount and the size
       return [...prev, { ...clickedItem, amount: 1, id: clickedItem._id }];
@@ -94,17 +90,17 @@ function Gallery() {
 
   const handlePictureFileChange = (e) => {
     setPictureFiles(e.target.files);
-  }
+  };
 
   const handleUploadPictures = async (e) => {
     const formData = new FormData();
     for (let i = 0; i < pictureFiles.length; i++) {
       formData.append('files', pictureFiles[i]);
       formData.append('userId', loggedInUser._id);
-    }
+    };
     await pictureFilesUpload(formData);
     getPictures();
-  }
+  };
 
   // Declaring States
   const [pictureFiles, setPictureFiles] = useState('');
@@ -132,7 +128,7 @@ function Gallery() {
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   const getPictures = async () => {
     try {
@@ -141,7 +137,7 @@ function Gallery() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     getPictureFiles()
@@ -195,10 +191,7 @@ function Gallery() {
         </section>
       </section>
     </>
-
-  )
-
-
+  );
 };
 
 export default Gallery;

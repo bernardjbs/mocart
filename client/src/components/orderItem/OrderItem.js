@@ -4,30 +4,27 @@ import './orderItem.css';
 function OrderItem({ orders }) {
 
   const saveOrder = () => {
-    
-  //   let file = convertBase64ToFile(base64String, fileName);
-  //   saveAs(file, fileName);
-  // }
+    //   let file = convertBase64ToFile(base64String, fileName);
+    //   saveAs(file, fileName);
+    // }
 
-  // const convertBase64ToFile = (base64String, fileName) => {
-  //   let arr = base64String.split(',');
-  //   let mime = arr[0].match(/:(.*?);/)[1];
-  //   let bstr = atob(arr[1]);
-  //   let n = bstr.length;
-  //   let uint8Array = new Uint8Array(n);
-  //   while (n--) {
-  //      uint8Array[n] = bstr.charCodeAt(n);
-  //   }
-  //   let file = new File([uint8Array], fileName, { type: mime });
-  //   return file;
-  }
+    // const convertBase64ToFile = (base64String, fileName) => {
+    //   let arr = base64String.split(',');
+    //   let mime = arr[0].match(/:(.*?);/)[1];
+    //   let bstr = atob(arr[1]);
+    //   let n = bstr.length;
+    //   let uint8Array = new Uint8Array(n);
+    //   while (n--) {
+    //      uint8Array[n] = bstr.charCodeAt(n);
+    //   }
+    //   let file = new File([uint8Array], fileName, { type: mime });
+    //   return file;
+  };
   
   const downloadImages = () => {
-    console.log("hello")
-    // console.log(orders)
-  }
 
-  console.log(orders)
+  };
+
   return (
     <>
       {orders.map(order => (
@@ -72,4 +69,4 @@ function OrderItem({ orders }) {
   )
 }
 
-export default OrderItem
+export default OrderItem;

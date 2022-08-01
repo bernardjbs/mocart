@@ -16,7 +16,6 @@ module.exports = {
   async createUser(req, res) {
     try {
       const newUser = await User.create(req.body);
-
       const token = signToken(newUser);
       res.status(200).json({
         message: "You are successfully Signed Up and logged in", token: token

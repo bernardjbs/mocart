@@ -10,8 +10,7 @@ const {
 
 // /api/users
 router.route('/')
-  .get(getUsers)
-
+  .get(getUsers);
 
 // /api/users/:userId
 router.route('/:userId')
@@ -21,7 +20,7 @@ router.route('/:userId')
 
 // /api/users/login
 router.route('/login')
-  .post(loginUser)
+  .post(loginUser);
 
 router.route('/signup')
   .post(createUser);

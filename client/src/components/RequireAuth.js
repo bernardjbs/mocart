@@ -1,6 +1,6 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useUserContext from '../hooks/useUserContext';
-import Auth from '../utils/auth'
+import Auth from '../utils/auth';
 
 const RequireAuth = ({ userType }) => {
   const user = useUserContext();

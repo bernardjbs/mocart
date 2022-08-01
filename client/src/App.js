@@ -37,13 +37,10 @@ function App() {
           <Route path="*" element={<Missing />} />
           <Route path="/logout" element={<Home />} />
         </Route>
-
-
-
       </Routes>
       {/* <MocartContainer /> */}
     </>
   );
-}
+};
 
 export default App;
