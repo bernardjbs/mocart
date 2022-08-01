@@ -25,6 +25,10 @@ if (process.env.NODE_ENV === 'production') {
 
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
+
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    });
   });
   buildpath = path.resolve('../client', 'build', 'index.html')
   // On Development mode  
@@ -33,9 +37,7 @@ if (process.env.NODE_ENV === 'production') {
     res.send('DEVELOPMENT MODE - API is running...')
   })
 }
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+
 
 app.use(routes);
 
