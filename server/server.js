@@ -19,7 +19,6 @@ app.use(cors({ origin: ["http://localhost:3000", "http://localhost:5000"] }));
 
 // Serve static folder uploads - To be used if pictures are uploaded to server
 // app.use('/server/uploads',express.static(path.join(__dirname,'uploads')));
-
 // On Production mode
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
@@ -34,6 +33,9 @@ if (process.env.NODE_ENV === 'production') {
     res.send('DEVELOPMENT MODE - API is running...')
   })
 }
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 app.use(routes);
 
