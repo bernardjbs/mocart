@@ -40,7 +40,7 @@ function Orders() {
         });
         return [filteredOrders];
       } else {
-        return null;
+        return [];
       }
 
     } catch (error) {
