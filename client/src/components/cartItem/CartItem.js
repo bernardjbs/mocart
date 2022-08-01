@@ -8,7 +8,7 @@ function CartItem({ item, addToCart, removeFromCart, handlePrice, handleSelected
 
   return (
     <>
-      <div>
+      <section className='cart-item-container'>
         <p>{item.filename}</p>
         <img className='cart-item-image' src={`data:image;base64,${item.imageBase64}`} alt={item.filename} />
         {/* <img src={item.imageBase64} alt={item.title} /> */}
@@ -36,11 +36,11 @@ function CartItem({ item, addToCart, removeFromCart, handlePrice, handleSelected
           </Button>
           <ItemOrder
             item={item}
-            handlePrice={handlePrice}  
+            handlePrice={handlePrice}
             handleSelectedSize={handleSelectedSize}
           />
         </div>
-      </div>
+      </section>
       <hr />
     </>
   );

@@ -60,11 +60,6 @@ section > h2, section > h5 {
   color: var(--color-light);
 }
 
-section > h2 {
-  color: var(--color-primary);
-  margin-bottom: 3rem;
-}
-
 .text-light {
   color: var(--color-light);
 }
@@ -129,10 +124,6 @@ img {
 @media screen and (max-width: 1024px) {
   .container {
     width: var(--container-width-md);
-  }
-
-  section{
-    margin-top: 6rem;
   }
 }
 

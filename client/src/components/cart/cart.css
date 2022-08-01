@@ -1,0 +1,17 @@
+.cart-container {
+  background: var(--color-bg);
+  padding-top: 2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-payment {
+  margin-bottom: 25rem;
+}

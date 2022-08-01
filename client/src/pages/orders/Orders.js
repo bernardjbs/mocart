@@ -64,22 +64,31 @@ function Orders() {
   return (
     <>
       <Nav />
-      <h1>Orders</h1>
-      
       <Drawer anchor='right' open={orderOpen} onClose={() => setOrderOpen(false)}>
         <Order customers={customers} />
       </Drawer>
+      <h1>Orders</h1>
+      <section className='orders-container'>
+        <section className='order-cards-container'>
+          <Grid container spacing={3}>
 
-      <Grid container spacing={3}>
-        {customers.map(customer => (
-          <Grid item key={customer.id} xs={12} sm={4}>
-            <p>Customer: {customer.name}</p>
-            <p>Orders: {customer.orders.length}</p>
-            <button className='btn btn-primary' onClick={() => setOrderOpen(true)}>View Order</button>
+            {customers.map(customer => (
+
+              <section className='order-card'>
+                <Grid item key={customer.id} xs={12} sm={12}>
+                  <p>Customer: {customer.name}</p>
+                  <p>Orders: {customer.orders.length}</p>
+                  <button className='btn btn-primary btn-view-order' onClick={() => setOrderOpen(true)}>View Order</button>
+                </Grid>
+              </section>
+            ))}
+
+
           </Grid>
-        ))}
+        </section>
+      </section>
 
-      </Grid>
+
 
 
       {/* <section>

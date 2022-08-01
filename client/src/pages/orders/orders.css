@@ -3,3 +3,33 @@
   flex-direction: row;
   gap: 2rem
 }
+
+.order-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
+  width: 25vw;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-bg-variant);
+}
+
+.order-cards-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.orders-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-view-order {
+  margin-top: 1.5rem;
+}

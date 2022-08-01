@@ -158,7 +158,7 @@ function Gallery() {
         <section className='upload-section'>
           <input type="file" onChange={(e) => handlePictureFileChange(e)} className="form-control" multiple />
           <div className="col-10">
-            <button type="button" onClick={() => handleUploadPictures()} className="btn btn-danger">Upload</button>
+            <button type="button" onClick={() => handleUploadPictures()} className="btn btn-primary">Upload</button>
           </div>
         </section>
       </section>
