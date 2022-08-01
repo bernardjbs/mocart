@@ -17,6 +17,8 @@ app.use(express.json());
 // Use cors middleware to allow React server with port 3000 for development and 5000 for production(build) to communicate with the backend server (port 5000)
 app.use(cors({ origin: ["http://localhost:3000", "http://localhost:5000"] }));
 
+app.use(routes);
+
 // Serve static folder uploads - To be used if pictures are uploaded to server
 // app.use('/server/uploads',express.static(path.join(__dirname,'uploads')));
 // On Production mode
@@ -39,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-app.use(routes);
+
 
 db.once('open', () => {
 
